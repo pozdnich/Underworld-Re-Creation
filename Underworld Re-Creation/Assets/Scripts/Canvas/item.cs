@@ -8,6 +8,9 @@ using static UnityEditor.Progress;
 
 public class item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler/*, IDropHandler*/
 {
+
+
+
     public inventory inventory; // обьект inventory для работы с ним
     public Canvas canvas; // canvas с которым работает именно инвентарь
     public Cell PrevCell; // клетка в которой находится предмет
@@ -16,10 +19,23 @@ public class item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
 
     Vector2 positionItem; // координаты item
     public itemSize Size; // енуминатор для определения размера предметов (количества занимаемых леток)
+
+    public Transform nowTransform;
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+
+        if (canvas == null)
+        {
+            canvas = GetComponentInParent<Canvas>();
+        }
+
+        if (inventory == null)
+        {
+            inventory = GetComponentInParent<inventory>();
+            Debug.LogError($"inventory не назначен в инспекторе и не найден в родительских объектах.{name}" );
+        }
     }
 
     //что происходит при первом опускании кнопки мыши
@@ -34,11 +50,11 @@ public class item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     //что происходит при зажатии кнопки мыши
     public void OnDrag(PointerEventData eventData)
     {
-        positionItem = Input.mousePosition;
-        positionItem.x -= Screen.width / 2;
-        positionItem.y -= Screen.height / 2;
+        //positionItem = Input.mousePosition;
+        //positionItem.x -= Screen.width / 2;
+        //positionItem.y -= Screen.height / 2;
         
-        rectTransform.anchoredPosition = positionItem;
+        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         if (PrevCell)
         {
            
@@ -111,27 +127,71 @@ public class item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
 
     public void OnDrop(PointerEventData eventData)
     {
-        var dragItem = eventData.pointerDrag.GetComponent<item>();
-        Debug.Log("Действие");
-        SetPosition(dragItem, dragItem.PrevCell);
+        //var dragItem = eventData.pointerDrag.GetComponent<item>();
+        //Debug.Log("Действие");
+        //SetPosition(dragItem, dragItem.PrevCell);
     }
     public void SetPosition(item _item,Cell cell)
     {
+        Debug.Log($"_item.transform.localPosition x={_item.transform.localPosition.x} y={_item.transform.localPosition.y} ");
         _item.transform.SetParent(cell.transform);
         _item.transform.localPosition = Vector3.zero;
         var itemSize = _item.GetSize();
         var newPos = _item.transform.localPosition;
         if (itemSize.x > 1)
         {
-            newPos.x += itemSize.x * 12.5f;
+            newPos.x += itemSize.x * 10f;
         }
         if (itemSize.y > 1)
         {
-            newPos.y -= itemSize.y * 12.5f;
+            newPos.y -= itemSize.y * 10f;
         }
+        Debug.Log($"_item.transform.localPosition x={_item.transform.localPosition.x} y={_item.transform.localPosition.y} ");
         _item.transform.localPosition = newPos;
-        _item.transform.SetParent(inventory.transform);
+        Debug.Log($"_item.transform.localPosition x={_item.transform.localPosition.x} y={_item.transform.localPosition.y} ,newPos  x={newPos.x} y={newPos.y}");
+        _item.transform.SetParent(canvas.GetComponent<inventory>().transformItems);
+        Debug.Log($"_item.transform.localPosition x={_item.transform.localPosition.x} y={_item.transform.localPosition.y} ,newPos  x={newPos.x} y={newPos.y}");
         inventory.CellsOcupation(cell, _item.Size, false);
         inventory.UpdateCellsColor();
     }
+
+    public void SetInitialPosition(item _item, Cell cell)
+    {
+        if (inventory == null)
+        {
+            inventory = GetComponentInParent<inventory>();
+        }
+        if (canvas == null)
+        {
+            canvas = GetComponentInParent<Canvas>();
+        }
+
+        if (inventory != null)
+        {
+            _item.transform.SetParent(cell.transform); 
+            _item.transform.localPosition = Vector3.zero;
+            var itemSize = _item.GetSize();
+            var newPos = _item.transform.localPosition;
+            if (itemSize.x > 1)
+            {
+                newPos.x += itemSize.x * 10f;
+            }
+            if (itemSize.y > 1)
+            {
+                newPos.y -= itemSize.y * 10f;
+            }
+            _item.transform.localPosition = newPos;
+            Debug.Log($"_item.transform.localPosition x={_item.transform.localPosition.x} y={_item.transform.localPosition.y} ,newPos  x={newPos.x} y={newPos.y}");
+           
+            _item.transform.SetParent(canvas.GetComponent<inventory>().transformItems,false);
+            Debug.Log($"_item.transform.localPosition x={_item.transform.localPosition.x} y={_item.transform.localPosition.y} ,newPos  x={newPos.x} y={newPos.y}");
+
+        }
+        else
+        {
+            Debug.LogError("inventory не найден для SetInitialPosition");
+        }
+    }
+
+
 }

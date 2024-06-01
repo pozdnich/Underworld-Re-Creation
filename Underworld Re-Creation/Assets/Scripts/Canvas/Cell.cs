@@ -17,7 +17,7 @@ public class Cell : MonoBehaviour,IDropHandler,IPointerEnterHandler, IPointerExi
     public GraphicRaycaster raycaster;
     private void Start()
     {
-        image = GetComponent<Image>(); // присваеваем компонент для управления цветом
+       
     }
     //используется для размещения обьекта в новую клетку, либо для возврата на предыдущую позицию
     public void OnDrop(PointerEventData eventData)

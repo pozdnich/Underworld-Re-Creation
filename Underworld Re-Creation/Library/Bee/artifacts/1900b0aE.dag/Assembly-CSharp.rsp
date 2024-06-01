@@ -364,6 +364,7 @@
 "Assets/Scripts/Canvas/item.cs"
 "Assets/Scripts/Controllers/cameraController.cs"
 "Assets/Scripts/Controllers/playerController.cs"
+"Assets/Scripts/PickUp.cs"
 -langversion:9.0
 
 /deterministic
