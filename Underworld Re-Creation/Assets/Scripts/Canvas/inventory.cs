@@ -9,6 +9,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 
 public class inventory : MonoBehaviour
@@ -30,15 +31,20 @@ public class inventory : MonoBehaviour
     public Cell[,] cells; // двухмерный масив инвентаря
     public item draggenItem; // элемент перетаскивания
 
-    public List<item> initialItems; // Список предметов для добавления при запуске
-
+    public List<item> initialItems; // Список предметов для добавления при запуске(надо будет потом избавится и настроить загрузку от Items)
+    public List<item> Items; // Список предметов которыми заправляет игрок
+    
+    bool OneUse; // требуется для загрузки, тоесть для того чтобы передать в инвентарь вещи из сохранения
+  
     void Start()
     {
         cells = new Cell[SizeX, SizeY];
-        CreateNewInventory();  ////Думаю стоит сделать инвентарь не создающимся сразу а уже существующим
+        CreateNewInventory();  
 
-       AddInitialItems();
+        OneUse = true;
     }
+
+   
     // создание инвентаря
     private void CreateNewInventory()
     {
@@ -59,11 +65,28 @@ public class inventory : MonoBehaviour
         }
        
     }
+   
+    //Костыль коратюн для адекватного расположения item
+    private IEnumerator initialItemsMetod()
+    {
+        // Ждём одну секунду
+        yield return new WaitForSeconds(0.01f);
 
+        // Вызываем OnDrop
+        AddInitialItems();
+    }
     void Update()
     {
-
+        if (OneUse)
+        {
+            StartCoroutine(initialItemsMetod());
+            OneUse = false;
+            
+        }
+       
     }
+   
+
     //Обновить цвет свободных клеток
     public void UpdateCellsColor()
     {
@@ -211,8 +234,10 @@ public class inventory : MonoBehaviour
 
                     if (CheckCellFree(cells[x, y], newItem.Size))
                     {
+                        
                         newItem.SetInitialPosition(newItem, cells[x, y]); // Устанавливаем начальную позицию
                         newItem.PrevCell = cells[x, y];
+                        Items.Add(newItem);
                         CellsOcupation(cells[x, y], newItem.Size, false);
                         
                         nextInitialItem = true;

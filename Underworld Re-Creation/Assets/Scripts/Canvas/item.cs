@@ -1,6 +1,8 @@
 using sc.terrain.vegetationspawner;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,7 +17,7 @@ public class item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     public Canvas canvas; // canvas с которым работает именно инвентарь
     public Cell PrevCell; // клетка в которой находится предмет
     RectTransform rectTransform; // Прямое преобразование ?
-    CanvasGroup canvasGroup; // для управления в canvasGroup ?
+    public CanvasGroup canvasGroup; // для управления в canvasGroup ?
 
     Vector2 positionItem; // координаты item
     public itemSize Size; // енуминатор для определения размера предметов (количества занимаемых леток)
@@ -96,14 +98,23 @@ public class item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         if (!isOverInventoryCell || (targetCell != null && !inventory.CheckCellFree(targetCell, Size)))
         {
             SetPosition(this, PrevCell);
+           
         }
         else if (targetCell != null)
         {
+            Cell cell = PrevCell;
             SetPosition(this, targetCell);
             PrevCell = targetCell;
+            if (!cell.isFree)
+            {
+               
+                inventory.CellsOcupation(cell, this.Size, true);
+                inventory.UpdateCellsColor();
+                
+            }
         }
     }
-
+    //Вернуть размер item
     public Vector2Int GetSize()
     {
        
@@ -124,16 +135,16 @@ public class item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         return size = Vector2Int.zero;
     }
 
-
+    // Будет для выкидывания или переноса в Профиль
     public void OnDrop(PointerEventData eventData)
     {
         //var dragItem = eventData.pointerDrag.GetComponent<item>();
         //Debug.Log("Действие");
         //SetPosition(dragItem, dragItem.PrevCell);
     }
+    //Меняем Позицию
     public void SetPosition(item _item,Cell cell)
     {
-        Debug.Log($"_item.transform.localPosition x={_item.transform.localPosition.x} y={_item.transform.localPosition.y} ");
         _item.transform.SetParent(cell.transform);
         _item.transform.localPosition = Vector3.zero;
         var itemSize = _item.GetSize();
@@ -146,15 +157,16 @@ public class item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         {
             newPos.y -= itemSize.y * 10f;
         }
-        Debug.Log($"_item.transform.localPosition x={_item.transform.localPosition.x} y={_item.transform.localPosition.y} ");
+       
         _item.transform.localPosition = newPos;
-        Debug.Log($"_item.transform.localPosition x={_item.transform.localPosition.x} y={_item.transform.localPosition.y} ,newPos  x={newPos.x} y={newPos.y}");
+        
         _item.transform.SetParent(canvas.GetComponent<inventory>().transformItems);
-        Debug.Log($"_item.transform.localPosition x={_item.transform.localPosition.x} y={_item.transform.localPosition.y} ,newPos  x={newPos.x} y={newPos.y}");
+       
         inventory.CellsOcupation(cell, _item.Size, false);
         inventory.UpdateCellsColor();
+        
     }
-
+    //Меняем позицию при загрузке сохранения допустим(Я ещё подумаю о том чтобы скрестить с методом SetPosition для укорачивания кода)
     public void SetInitialPosition(item _item, Cell cell)
     {
         if (inventory == null)
@@ -181,11 +193,11 @@ public class item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
                 newPos.y -= itemSize.y * 10f;
             }
             _item.transform.localPosition = newPos;
-            Debug.Log($"_item.transform.localPosition x={_item.transform.localPosition.x} y={_item.transform.localPosition.y} ,newPos  x={newPos.x} y={newPos.y}");
            
-            _item.transform.SetParent(canvas.GetComponent<inventory>().transformItems,false);
-            Debug.Log($"_item.transform.localPosition x={_item.transform.localPosition.x} y={_item.transform.localPosition.y} ,newPos  x={newPos.x} y={newPos.y}");
 
+            _item.transform.SetParent(canvas.GetComponent<inventory>().transformItems);
+           
+            
         }
         else
         {

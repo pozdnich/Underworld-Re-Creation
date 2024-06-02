@@ -46,9 +46,10 @@ public class Cell : MonoBehaviour,IDropHandler,IPointerEnterHandler, IPointerExi
 
         if (inventory.CheckCellFree(this,dragItem.Size) && isOverInventoryCell) 
         {
+           
             dragItem.SetPosition(dragItem, this);  
             dragItem.PrevCell = this;
-            
+           
         }
         else
         {
