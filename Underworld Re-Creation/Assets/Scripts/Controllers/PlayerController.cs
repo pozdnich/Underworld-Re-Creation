@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,8 +12,11 @@ public class playerController : MonoBehaviour
     NavMeshAgent agent;
 
     Vector3 _prevPosition;
-    
-   
+
+    public GameObject arrowPrefab; // Префаб стрелы
+    public Transform bowTransform; // Точка, откуда выпускается стрела
+    public float arrowSpeed = 1f; // Скорость полета стрелы
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -46,5 +50,27 @@ public class playerController : MonoBehaviour
         float curSpeed = curMove.magnitude / Time.deltaTime;
         _prevPosition = transform.position;
         animator.SetFloat("SpeedPlayer", curSpeed);
+
+        if (Physics.Raycast(ray, out hit, 500) && Input.GetButtonDown("Ability1"))
+        {
+            ShootArrow(hit.point);
+
+        }
+
+    }
+    //метод полёта обьекта(по типу стрелы или фаербола)
+    void ShootArrow(Vector3 targetPosition)
+    {
+        // Поворачиваем персонажа в сторону цели
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        direction.y = 0; // Убираем наклон по вертикали, чтобы персонаж не наклонялся вверх/вниз
+        transform.rotation = Quaternion.LookRotation(direction);
+
+        GameObject arrow = Instantiate(arrowPrefab, bowTransform.position, bowTransform.rotation);
+        Rigidbody rb = arrow.GetComponent<Rigidbody>();
+        rb.velocity = bowTransform.forward * arrowSpeed;
+
+        // Уничтожаем стрелу через 4 секунды
+        Destroy(arrow, 2f);
     }
 }

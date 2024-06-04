@@ -365,6 +365,7 @@
 "Assets/Scripts/Controllers/cameraController.cs"
 "Assets/Scripts/Controllers/playerController.cs"
 "Assets/Scripts/PickUp.cs"
+"Assets/Scripts/PickUp1.cs"
 -langversion:9.0
 
 /deterministic
