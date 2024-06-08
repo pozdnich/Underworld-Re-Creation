@@ -620,6 +620,7 @@ GameObject:
   - component: {fileID: 1957082819}
   - component: {fileID: 1957082818}
   - component: {fileID: 1957082822}
+  - component: {fileID: 1957082823}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -728,11 +729,21 @@ MonoBehaviour:
   SizeY: 10
   cellPrefub: {fileID: 793418512411197004, guid: d6322f357de002940a0585684466be16, type: 3}
   draggenItem: {fileID: 0}
-  initialItems:
-  - {fileID: 8800444869924637593, guid: 04de738577417554e8299204a5cfb108, type: 3}
-  - {fileID: 9192161458502005603, guid: a930647b6cc841f4f80d9b4297162b9d, type: 3}
-  - {fileID: 3188048315551783255, guid: ffb26f549a5379347bc657f3ae2fd994, type: 3}
+  initialItems: []
   Items: []
+--- !u!114 &1957082823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957082817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c085c65292232c418c14b77f9c21c21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryUI: {fileID: 1234361467}
 --- !u!1 &54560167684644950
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,7 +1242,7 @@ GameObject:
   - component: {fileID: 6206882328458029661}
   m_Layer: 3
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: 'Earth '
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1729,6 +1740,63 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
+--- !u!1001 &3308786170694591848
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4628966395667094435, guid: 6e240026dceaf844d9749f1f6fe8eb38, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 306.502
+      objectReference: {fileID: 0}
+    - target: {fileID: 4628966395667094435, guid: 6e240026dceaf844d9749f1f6fe8eb38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.369
+      objectReference: {fileID: 0}
+    - target: {fileID: 4628966395667094435, guid: 6e240026dceaf844d9749f1f6fe8eb38, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -297.129
+      objectReference: {fileID: 0}
+    - target: {fileID: 4628966395667094435, guid: 6e240026dceaf844d9749f1f6fe8eb38, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.44121134
+      objectReference: {fileID: 0}
+    - target: {fileID: 4628966395667094435, guid: 6e240026dceaf844d9749f1f6fe8eb38, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5525692
+      objectReference: {fileID: 0}
+    - target: {fileID: 4628966395667094435, guid: 6e240026dceaf844d9749f1f6fe8eb38, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.44121137
+      objectReference: {fileID: 0}
+    - target: {fileID: 4628966395667094435, guid: 6e240026dceaf844d9749f1f6fe8eb38, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.552569
+      objectReference: {fileID: 0}
+    - target: {fileID: 4628966395667094435, guid: 6e240026dceaf844d9749f1f6fe8eb38, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4628966395667094435, guid: 6e240026dceaf844d9749f1f6fe8eb38, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4628966395667094435, guid: 6e240026dceaf844d9749f1f6fe8eb38, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857089591610511688, guid: 6e240026dceaf844d9749f1f6fe8eb38, type: 3}
+      propertyPath: m_Name
+      value: SwordStandart 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6e240026dceaf844d9749f1f6fe8eb38, type: 3}
 --- !u!4 &3334479094179685766
 Transform:
   m_ObjectHideFlags: 0
@@ -2836,6 +2904,7 @@ MonoBehaviour:
   arrowPrefab: {fileID: 1314373849333916219, guid: e417bf90660e9c64a8d73fa09408c23b, type: 3}
   bowTransform: {fileID: 590913899}
   arrowSpeed: 10
+  Focus: {fileID: 0}
 --- !u!195 &6351623946433854501
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3834,3 +3903,4 @@ SceneRoots:
   - {fileID: 1957082821}
   - {fileID: 1798946726}
   - {fileID: 36666219}
+  - {fileID: 3308786170694591848}

@@ -17,6 +17,8 @@ public class playerController : MonoBehaviour
     public Transform bowTransform; // Точка, откуда выпускается стрела
     public float arrowSpeed = 1f; // Скорость полета стрелы
 
+    public GameObject Focus; //для определения что если мы указали на предмет то когда подойдём то нужно его взять в инвентарь
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -36,6 +38,20 @@ public class playerController : MonoBehaviour
             agent.SetDestination(hit.point);//вводим координаты
             animator.SetBool("Run", true);//запускаем анимацию бега
             agent.Resume();// принудительный запуск перемещения
+
+
+            Debug.Log(hit.collider.tag);
+            // Если нажали на предмет
+            if (hit.collider.CompareTag("Item"))
+            {
+                Focus = hit.collider.gameObject;
+                Debug.Log("Фокус взят на предмет");
+            }
+            else
+            {
+                Focus = null;
+            }
+
 
         }
 
@@ -73,4 +89,8 @@ public class playerController : MonoBehaviour
         // Уничтожаем стрелу через 4 секунды
         Destroy(arrow, 2f);
     }
+
+
+    
+   
 }

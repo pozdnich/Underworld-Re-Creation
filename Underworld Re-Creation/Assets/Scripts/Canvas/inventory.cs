@@ -29,10 +29,10 @@ public class inventory : MonoBehaviour
     public int SizeX, SizeY; // Размер инвентаря
     public Cell cellPrefub; // образец одной клетки
     public Cell[,] cells; // двухмерный масив инвентаря
-    public item draggenItem; // элемент перетаскивания
+    public itemInCanvas draggenItem; // элемент перетаскивания
 
-    public List<item> initialItems; // Список предметов для добавления при запуске(надо будет потом избавится и настроить загрузку от Items)
-    public List<item> Items; // Список предметов которыми заправляет игрок
+    public List<itemInCanvas> initialItems; // Список предметов для добавления при запуске(надо будет потом избавится и настроить загрузку от Items)
+    public List<itemInCanvas> Items; // Список предметов которыми заправляет игрок
     
     bool OneUse; // требуется для загрузки, тоесть для того чтобы передать в инвентарь вещи из сохранения
   
@@ -69,16 +69,19 @@ public class inventory : MonoBehaviour
     //Костыль коратюн для адекватного расположения item
     private IEnumerator initialItemsMetod()
     {
+        GetComponent<CanvasController>().inventoryUI.SetActive(!GetComponent<CanvasController>().inventoryUI.activeSelf);
         // Ждём одну секунду
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.00001f);
 
         // Вызываем OnDrop
         AddInitialItems();
+        GetComponent<CanvasController>().inventoryUI.SetActive(!GetComponent<CanvasController>().inventoryUI.activeSelf);
     }
     void Update()
     {
         if (OneUse)
         {
+
             StartCoroutine(initialItemsMetod());
             OneUse = false;
             
@@ -218,11 +221,11 @@ public class inventory : MonoBehaviour
     // Добавление начальных предметов
     public void AddInitialItems()
     {
-        foreach (item itemPrefab in initialItems)
+        foreach (itemInCanvas itemPrefab in initialItems)
         {
             
             // Инстанцируем предмет из префаба
-            item newItem = Instantiate(itemPrefab, transformItems); // Делаем инвентарь родительским объектом
+            itemInCanvas newItem = Instantiate(itemPrefab, transformItems); // Делаем инвентарь родительским объектом
 
             // Находим первую подходящую свободную ячейку для предмета
             bool nextInitialItem = false;
@@ -252,6 +255,44 @@ public class inventory : MonoBehaviour
                 }
             }
         }
+        UpdateCellsColor();
+    }
+
+    public void AddItem(itemInCanvas itemPrefab)
+    {
+        
+
+            // Инстанцируем предмет из префаба
+            itemInCanvas newItem = Instantiate(itemPrefab, transformItems); // Делаем инвентарь родительским объектом
+
+            // Находим первую подходящую свободную ячейку для предмета
+            bool nextInitialItem = false;
+            for (int y = 0; y < SizeY; y++)
+            {
+                for (int x = 0; x < SizeX; x++)
+                {
+
+
+                    if (CheckCellFree(cells[x, y], newItem.Size))
+                    {
+
+                        newItem.SetInitialPosition(newItem, cells[x, y]); // Устанавливаем начальную позицию
+                        newItem.PrevCell = cells[x, y];
+                        Items.Add(newItem);
+                        CellsOcupation(cells[x, y], newItem.Size, false);
+
+                        nextInitialItem = true;
+
+                        break;
+                    }
+                }
+                if (nextInitialItem)
+                {
+
+                    break;
+                }
+            }
+        
         UpdateCellsColor();
     }
 }

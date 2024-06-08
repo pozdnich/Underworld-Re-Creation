@@ -22,7 +22,7 @@ public class Cell : MonoBehaviour,IDropHandler,IPointerEnterHandler, IPointerExi
     //используется для размещения обьекта в новую клетку, либо для возврата на предыдущую позицию
     public void OnDrop(PointerEventData eventData)
     {
-        var dragItem = eventData.pointerDrag.GetComponent<item>();
+        var dragItem = eventData.pointerDrag.GetComponent<itemInCanvas>();
        
         if (dragItem == null)
         {
