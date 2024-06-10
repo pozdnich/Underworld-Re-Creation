@@ -106,5 +106,5 @@ MonoBehaviour:
   canvas: {fileID: 0}
   PrevCell: {fileID: 0}
   canvasGroup: {fileID: 0}
-  Size: 2
+  Size: 3
   nowTransform: {fileID: 0}

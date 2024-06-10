@@ -184,10 +184,10 @@ public class inventory : MonoBehaviour
             case itemSize.Smal:
                 return newSize = Vector2Int.one;
 
-            case itemSize.MediumHorisontal:
+            case itemSize.MediumVertical:
                 return newSize = new Vector2Int(1, 2);
 
-            case itemSize.MediumVertical:
+            case itemSize.MediumHorisontal:
                 return newSize = new Vector2Int(2, 1);
 
             case itemSize.MediumSquare:

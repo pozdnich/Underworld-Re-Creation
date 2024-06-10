@@ -372,8 +372,10 @@
 "Assets/Scripts/Items/itemScriptableObject/Consumable.cs"
 "Assets/Scripts/Items/itemScriptableObject/Equipment.cs"
 "Assets/Scripts/Items/itemScriptableObject/Item.cs"
+"Assets/Scripts/Items/itemScriptableObject/SecondaryWeapon.cs"
 "Assets/Scripts/Items/itemScriptableObject/Weapon.cs"
 "Assets/Scripts/Items/itemSize.cs"
+"Assets/Scripts/MeshFromSkinnedMesh.cs"
 -langversion:9.0
 
 /deterministic

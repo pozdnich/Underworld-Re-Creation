@@ -124,9 +124,9 @@ public class itemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         {
             case itemSize.Smal:
                 return size = Vector2Int.one;
-            case itemSize.MediumHorisontal:
-                return size = new Vector2Int(1,2);
             case itemSize.MediumVertical:
+                return size = new Vector2Int(1,2);
+            case itemSize.MediumHorisontal:
                 return size = new Vector2Int(2, 1);
             case itemSize.MediumSquare:
                 return size = new Vector2Int(2, 2);
