@@ -8,8 +8,8 @@ public class Item : ScriptableObject {
 	new public string name = "New Item";    // Name of the item Название предмета
     public Sprite icon = null;              // Item icon Значок предмета
     public bool showInInventory = true;
+   
 
-    
 
 
     // Called when the item is pressed in the inventory Вызывается при нажатии предмета в инвентаре
@@ -31,4 +31,5 @@ public class Item : ScriptableObject {
 		
 	}
 
+   
 }

@@ -8,6 +8,7 @@ TagManager:
   - TestCube
   - 'Earth '
   - Item
+  - CellEquipped
   layers:
   - Default
   - TransparentFX

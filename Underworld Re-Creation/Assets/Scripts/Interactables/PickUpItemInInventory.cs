@@ -17,7 +17,7 @@ public class PickUpItemInInventory : MonoBehaviour
             if (player != null && player.Focus == gameObject)
             {
                 Debug.Log("Предмет был взят в фокус");
-                inventory.instance.AddItem(GetComponentInChildren<itemInCanvas>());
+                Inventory.instance.AddItem(GetComponentInChildren<ItemInCanvas>());
                 // Пишем надпись о соприкосновении
                 Debug.Log("Игрок положил в инвентарь предмет!");
                 Destroy(gameObject);

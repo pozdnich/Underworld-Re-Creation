@@ -12,11 +12,11 @@ using UnityEngine.UI;
 using static UnityEditor.Progress;
 
 
-public class inventory : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
     #region Singleton
 
-    public static inventory instance;
+    public static Inventory instance;
 
     void Awake()
     {
@@ -29,11 +29,12 @@ public class inventory : MonoBehaviour
     public int SizeX, SizeY; // Размер инвентаря
     public Cell cellPrefub; // образец одной клетки
     public Cell[,] cells; // двухмерный масив инвентаря
-    public itemInCanvas draggenItem; // элемент перетаскивания
+    public ItemInCanvas draggedItem; // элемент перетаскивания
 
-    public List<itemInCanvas> initialItems; // Список предметов для добавления при запуске(надо будет потом избавится и настроить загрузку от Items)
-    public List<itemInCanvas> Items; // Список предметов которыми заправляет игрок
-    
+    public List<ItemInCanvas> initialItems; // Список предметов для добавления при запуске(надо будет потом избавится и настроить загрузку от Items)
+    public List<ItemInCanvas> Items; // Список предметов которыми заправляет игрок
+    public ItemInCanvas[] ProfileSlot;
+
     bool OneUse; // требуется для загрузки, тоесть для того чтобы передать в инвентарь вещи из сохранения
   
     void Start()
@@ -110,7 +111,7 @@ public class inventory : MonoBehaviour
         }
     }
     //Проверить ячейку на свободность 
-    public bool CheckCellFree(Cell cell, itemSize size)
+    public bool CheckCellFree(Cell cell, ItemSize size)
     {
         Vector2Int newSize = GetSize(size);
         for (int y = cell.y; y < cell.y + newSize.y; y++)
@@ -135,7 +136,7 @@ public class inventory : MonoBehaviour
         return true;
     }
     //пока перетаскиваем изначальные клетки белые, когда предмет лежит закрасить ему прилежащие клетки чёрным 
-    public void CellsOcupation(Cell cell, itemSize size, bool isFree)
+    public void CellsOccupation(Cell cell, ItemSize size, bool isFree)
     {
         if (cell == null)
         {
@@ -176,31 +177,31 @@ public class inventory : MonoBehaviour
 
 
     //Вернуть размер предмета
-    public Vector2Int GetSize(itemSize size)
+    public Vector2Int GetSize(ItemSize size)
     {
         Vector2Int newSize = Vector2Int.zero;
         switch (size)
         {
-            case itemSize.Smal:
+            case ItemSize.Small:
                 return newSize = Vector2Int.one;
 
-            case itemSize.MediumVertical:
+            case ItemSize.MediumVertical:
                 return newSize = new Vector2Int(1, 2);
 
-            case itemSize.MediumHorisontal:
+            case ItemSize.MediumHorizontal:
                 return newSize = new Vector2Int(2, 1);
 
-            case itemSize.MediumSquare:
+            case ItemSize.MediumSquare:
                 return newSize = new Vector2Int(2, 2);
 
-            case itemSize.Large:
+            case ItemSize.Large:
                 return newSize = new Vector2Int(2, 3);
 
         }
         return newSize = Vector2Int.zero;
     }
     //Раскрашивание ячеек
-    public void CellsColorize(Cell cell, itemSize size, Color color)
+    public void CellsColorize(Cell cell, ItemSize size, Color color)
     {
         Vector2Int newSize = GetSize(size);
 
@@ -221,11 +222,11 @@ public class inventory : MonoBehaviour
     // Добавление начальных предметов
     public void AddInitialItems()
     {
-        foreach (itemInCanvas itemPrefab in initialItems)
+        foreach (ItemInCanvas itemPrefab in initialItems)
         {
             
             // Инстанцируем предмет из префаба
-            itemInCanvas newItem = Instantiate(itemPrefab, transformItems); // Делаем инвентарь родительским объектом
+            ItemInCanvas newItem = Instantiate(itemPrefab, transformItems); // Делаем инвентарь родительским объектом
 
             // Находим первую подходящую свободную ячейку для предмета
             bool nextInitialItem = false;
@@ -241,7 +242,7 @@ public class inventory : MonoBehaviour
                         newItem.SetInitialPosition(newItem, cells[x, y]); // Устанавливаем начальную позицию
                         newItem.PrevCell = cells[x, y];
                         Items.Add(newItem);
-                        CellsOcupation(cells[x, y], newItem.Size, false);
+                        CellsOccupation(cells[x, y], newItem.Size, false);
                         
                         nextInitialItem = true;
 
@@ -258,12 +259,12 @@ public class inventory : MonoBehaviour
         UpdateCellsColor();
     }
 
-    public void AddItem(itemInCanvas itemPrefab)
+    public void AddItem(ItemInCanvas itemPrefab)
     {
         
 
             // Инстанцируем предмет из префаба
-            itemInCanvas newItem = Instantiate(itemPrefab, transformItems); // Делаем инвентарь родительским объектом
+            ItemInCanvas newItem = Instantiate(itemPrefab, transformItems); // Делаем инвентарь родительским объектом
 
             // Находим первую подходящую свободную ячейку для предмета
             bool nextInitialItem = false;
@@ -279,7 +280,7 @@ public class inventory : MonoBehaviour
                         newItem.SetInitialPosition(newItem, cells[x, y]); // Устанавливаем начальную позицию
                         newItem.PrevCell = cells[x, y];
                         Items.Add(newItem);
-                        CellsOcupation(cells[x, y], newItem.Size, false);
+                        CellsOccupation(cells[x, y], newItem.Size, false);
 
                         nextInitialItem = true;
 

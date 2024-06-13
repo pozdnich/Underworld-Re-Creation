@@ -319,10 +319,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d832192534a022649b3daf24d69a8c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: a8bc991b02f44c343a9ce3c7ca0826ac, type: 2}
+  item: {fileID: 11400000, guid: 3698e797630b6254aab25f0dd9ca7cfd, type: 2}
   inventory: {fileID: 0}
   canvas: {fileID: 0}
   PrevCell: {fileID: 0}
+  PrevCellEquipped: {fileID: 0}
   canvasGroup: {fileID: 0}
   Size: 5
   nowTransform: {fileID: 0}
