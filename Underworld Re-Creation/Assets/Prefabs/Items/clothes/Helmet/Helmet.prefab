@@ -101,10 +101,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d832192534a022649b3daf24d69a8c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 7240386c2f86fc04cbc1d9f05de5820b, type: 2}
+  item: {fileID: 11400000, guid: 6a593084303b09846b49a80efdaae108, type: 2}
   inventory: {fileID: 0}
   canvas: {fileID: 0}
   PrevCell: {fileID: 0}
+  PrevCellEquipped: {fileID: 0}
   canvasGroup: {fileID: 0}
   Size: 1
   nowTransform: {fileID: 0}

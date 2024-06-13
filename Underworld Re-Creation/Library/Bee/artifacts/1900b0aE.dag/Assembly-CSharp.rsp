@@ -359,6 +359,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.15f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.15f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/Canvas/Cell.cs"
+"Assets/Scripts/Canvas/CellEquipped.cs"
 "Assets/Scripts/Canvas/inventory.cs"
 "Assets/Scripts/Controllers/cameraController.cs"
 "Assets/Scripts/Controllers/CanvasController.cs"
@@ -368,14 +369,14 @@
 "Assets/Scripts/Interactables/PickUpItemInInventory.cs"
 "Assets/Scripts/Items/ColorOnHover.cs"
 "Assets/Scripts/Items/itemInCanvas.cs"
-"Assets/Scripts/Items/itemScriptableObject/Armor.cs"
 "Assets/Scripts/Items/itemScriptableObject/Consumable.cs"
 "Assets/Scripts/Items/itemScriptableObject/Equipment.cs"
+"Assets/Scripts/Items/itemScriptableObject/EquipmentManager.cs"
 "Assets/Scripts/Items/itemScriptableObject/Item.cs"
-"Assets/Scripts/Items/itemScriptableObject/SecondaryWeapon.cs"
-"Assets/Scripts/Items/itemScriptableObject/Weapon.cs"
 "Assets/Scripts/Items/itemSize.cs"
 "Assets/Scripts/MeshFromSkinnedMesh.cs"
+"Assets/Scripts/Stats/Stat.cs"
+"Assets/Scripts/Stats/StatModifier.cs"
 -langversion:9.0
 
 /deterministic

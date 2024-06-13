@@ -1,9 +1,9 @@
 
-public enum itemSize 
+public enum ItemSize 
 {
     Null,
-    Smal,
-    MediumHorisontal,
+    Small,
+    MediumHorizontal,
     MediumVertical,
     MediumSquare,
     Large,

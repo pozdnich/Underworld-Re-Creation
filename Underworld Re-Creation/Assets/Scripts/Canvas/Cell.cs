@@ -12,7 +12,7 @@ public class Cell : MonoBehaviour,IDropHandler,IPointerEnterHandler, IPointerExi
     public TMP_Text CellText;   // текст отображающий допустим количество вещей данного item
     public int x, y; // координаты клетки
     public bool isFree; // свободна ли клетка
-    public inventory inventory;  // обьект inventory для работы с ним
+    public Inventory inventory;  // обьект inventory для работы с ним
     public Image image; // инструмент для картинки клетки
     public GraphicRaycaster raycaster;
     private void Start()
@@ -22,7 +22,7 @@ public class Cell : MonoBehaviour,IDropHandler,IPointerEnterHandler, IPointerExi
     //используется для размещения обьекта в новую клетку, либо для возврата на предыдущую позицию
     public void OnDrop(PointerEventData eventData)
     {
-        var dragItem = eventData.pointerDrag.GetComponent<itemInCanvas>();
+        var dragItem = eventData.pointerDrag.GetComponent<ItemInCanvas>();
        
         if (dragItem == null)
         {
@@ -60,12 +60,12 @@ public class Cell : MonoBehaviour,IDropHandler,IPointerEnterHandler, IPointerExi
     //для раскраски клетки при перемещения и захода мышки в данный момент на клетку
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (inventory.draggenItem)
+        if (inventory.draggedItem)
         {
             if (isFree) 
             {
                 
-                inventory.CellsColorize(this,inventory.draggenItem.Size, UnityEngine.Color.green);
+                inventory.CellsColorize(this,inventory.draggedItem.Size, UnityEngine.Color.green);
               
             }
         }
@@ -73,12 +73,12 @@ public class Cell : MonoBehaviour,IDropHandler,IPointerEnterHandler, IPointerExi
     //для раскраски клетки при перемещения и выхода мышки в данный момент с клетки
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (inventory.draggenItem)
+        if (inventory.draggedItem)
         {
             if (isFree)
             {
                 
-                inventory.CellsColorize(this, inventory.draggenItem.Size, UnityEngine.Color.red);
+                inventory.CellsColorize(this, inventory.draggedItem.Size, UnityEngine.Color.red);
                
             }
         }

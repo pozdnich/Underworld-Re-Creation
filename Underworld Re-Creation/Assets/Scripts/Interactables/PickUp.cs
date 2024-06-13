@@ -21,7 +21,7 @@ public class PickUp : MonoBehaviour
         // Проверяем, соприкасается ли коллайдер игрока с предметом
         if (other.CompareTag("Player"))
         {
-            inventory.instance.AddInitialItems();
+            Inventory.instance.AddInitialItems();
             // Пишем надпись о соприкосновении
             Debug.Log("Игрок соприкоснулся с предметом!");
         }
