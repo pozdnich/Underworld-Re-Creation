@@ -364,6 +364,7 @@
 "Assets/Scripts/Controllers/cameraController.cs"
 "Assets/Scripts/Controllers/CanvasController.cs"
 "Assets/Scripts/Controllers/playerController.cs"
+"Assets/Scripts/DropLoot.cs"
 "Assets/Scripts/Interactables/PickUp.cs"
 "Assets/Scripts/Interactables/PickUp1.cs"
 "Assets/Scripts/Interactables/PickUpItemInInventory.cs"

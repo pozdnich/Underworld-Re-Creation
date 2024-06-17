@@ -17,7 +17,7 @@ MonoBehaviour:
   showInInventory: 1
   equipSlot: 1
   specificEquipment: 2
-  prefab: {fileID: 0}
+  prefab: {fileID: -5567777601266415393, guid: 3eadc3f9731afa44cb066484f587e677, type: 3}
   ArmorPowerEquipment: 20
   AttackPowerEquipment: 0
   "Element\u0421oefficient": 0

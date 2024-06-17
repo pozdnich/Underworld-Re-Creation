@@ -5,6 +5,7 @@ using UnityEngine;
 public class CanvasController : MonoBehaviour
 {
     public GameObject inventoryUI;
+    public GameObject ProfileUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,12 @@ public class CanvasController : MonoBehaviour
 
             inventoryUI.SetActive(!inventoryUI.activeSelf);
             
+        }
+        if (Input.GetButtonDown("Profile"))
+        {
+
+            ProfileUI.SetActive(!ProfileUI.activeSelf);
+
         }
     }
 }

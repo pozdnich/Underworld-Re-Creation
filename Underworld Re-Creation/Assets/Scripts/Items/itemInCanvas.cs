@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -63,7 +64,7 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         canvasGroup.blocksRaycasts = true;
         inventory.draggedItem = null;
 
-        // Проверка, находится ли предмет над ячейкой инвентаря или профиля в случае экипировки
+        // Проверка, находится ли предмет над ячейкой инвентаря или профиля
         List<RaycastResult> hitResults = new List<RaycastResult>();
         PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
         pointerEventData.position = Input.mousePosition;
@@ -76,62 +77,88 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
 
         foreach (RaycastResult result in hitResults)
         {
-            if (result.gameObject.CompareTag("CellInventory") || result.gameObject.CompareTag("CellEquipped"))
+            if (result.gameObject.CompareTag("CellInventory"))
             {
-                if (result.gameObject.CompareTag("CellInventory"))
-                {
-                    targetCell = result.gameObject.GetComponent<Cell>();
-                }
-                if (result.gameObject.CompareTag("CellEquipped"))
-                {
-                    targetCellEquipped = result.gameObject.GetComponent<CellEquipped>();
-                }
-
+                targetCell = result.gameObject.GetComponent<Cell>();
+                isOverInventoryCell = true;
+                break;
+            }
+            if (result.gameObject.CompareTag("CellEquipped"))
+            {
+                targetCellEquipped = result.gameObject.GetComponent<CellEquipped>();
                 isOverInventoryCell = true;
                 break;
             }
         }
 
-        // Если предмет не помещен в ячейку инвентаря или ячейка занята, возвращаем его в предыдущую ячейку
-        if (!isOverInventoryCell || (targetCell != null && !inventory.CheckCellFree(targetCell, Size)) || (targetCellEquipped != null && !targetCellEquipped.isFree))
+        // Проверка, что предмет находится над ячейкой и ячейка свободна
+        bool isTargetCellFree = (targetCell != null && inventory.CheckCellFree(targetCell, Size));
+        bool isTargetCellEquippedFree = (targetCellEquipped != null && targetCellEquipped.isFree && targetCellEquipped.TypeOfEquipment == item.equipSlot) ;
+
+        if (!isOverInventoryCell || !(isTargetCellFree || isTargetCellEquippedFree))
         {
+            Debug.Log("Не соблюдено условие, возврат на прежнее место.");
+            // Возвращаем предмет в предыдущую ячейку
             if (PrevCell != null)
             {
                 SetPosition(this, PrevCell);
+                Debug.Log("PrevCell != null");
             }
             else if (PrevCellEquipped != null)
             {
                 SetPositionInProfile(this, PrevCellEquipped);
+                Debug.Log("PrevCellEquipped != null");
             }
         }
-        else if (targetCell != null || targetCellEquipped != null)
+        else
         {
             if (targetCell != null)
             {
-                Cell cell = PrevCell;
-                SetPosition(this, targetCell);
-                PrevCell = targetCell;
-                PrevCellEquipped = null;
-                if (!cell.isFree)
+                if (PrevCell != null)
                 {
-                    inventory.CellsOccupation(cell, this.Size, true);
-                    inventory.UpdateCellsColor();
+                    Debug.Log("Перемещение в инвентаре.");
+                    Cell cell = PrevCell;
+                    SetPosition(this, targetCell);
+                    PrevCell = targetCell;
+
+                    //if (!cell.isFree)
+                    //{
+                    //    inventory.CellsOccupation(cell, this.Size, true);
+                    //    inventory.UpdateCellsColor();
+                    //}
+                }
+                else
+                {
+                    Debug.Log("Перемещение в инвентарь из профиля.");
+                    CellEquipped cell = PrevCellEquipped;
+                    SetPosition(this, targetCell);
+                    PrevCell = targetCell;
+
+                    if (!cell.isFree)
+                    {
+                        cell.isFree = true;
+                        inventory.UpdateCellsColor();
+                    }
+
+                    PrevCellEquipped = null;
                 }
             }
             else if (targetCellEquipped != null)
             {
-                CellEquipped cell = PrevCellEquipped;
+                Debug.Log("Перемещение из инвенторя в Профиль.");
+                Cell cell = PrevCell;
                 SetPositionInProfile(this, targetCellEquipped);
                 PrevCellEquipped = targetCellEquipped;
-                PrevCell = null;
-                if (!cell.isFree)
+                if (cell != null && !cell.isFree)
                 {
-                    cell.isFree = true;
+                    inventory.CellsOccupation(cell, this.Size, true);
                     inventory.UpdateCellsColor();
                 }
+                PrevCell = null;
             }
         }
     }
+
 
     // Вернуть размер item
     public Vector2Int GetSize()

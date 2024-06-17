@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class CellEquipped : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+public class CellEquipped : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public TMP_Text CellText; // текст отображающий допустимое количество вещей данного item
     public EquipmentSlot TypeOfEquipment; // тип экипировки для этой ячейки
@@ -18,40 +18,7 @@ public class CellEquipped : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
         isFree = true; // Изначально ячейка свободна
     }
 
-    // Используется для размещения объекта в новую клетку, либо для возврата на предыдущую позицию
-    public void OnDrop(PointerEventData eventData)
-    {
-        var dragItem = eventData.pointerDrag.GetComponent<ItemInCanvas>();
-        if (dragItem == null) return;
-
-        // Проверяем, находится ли предмет над ячейкой инвентаря
-        List<RaycastResult> hitResults = new List<RaycastResult>();
-        raycaster = GetComponentInParent<Canvas>().GetComponent<GraphicRaycaster>();
-        raycaster.Raycast(eventData, hitResults);
-
-        bool isOverInventoryCell = false;
-        foreach (RaycastResult result in hitResults)
-        {
-            if (result.gameObject.CompareTag("CellEquipped"))
-            {
-                isOverInventoryCell = true;
-                break;
-            }
-        }
-
-        // Проверка соответствия типа предмета типу ячейки экипировки
-        if (isFree && isOverInventoryCell && TypeOfEquipment == dragItem.item.equipSlot)
-        {
-            dragItem.SetPositionInProfile(dragItem, this);
-            dragItem.PrevCell = null;
-            dragItem.PrevCellEquipped = this;
-            isFree = false;
-        }
-        else
-        {
-            dragItem.SetPosition(dragItem, dragItem.PrevCell);
-        }
-    }
+    
     
     public void OnPointerEnter(PointerEventData eventData)
     {
