@@ -15,10 +15,11 @@ MonoBehaviour:
   name: SwordStandart
   icon: {fileID: 21300000, guid: cdec0e2daaced52449400e647279cbec, type: 3}
   showInInventory: 1
+  AllThisItem: {fileID: 5182814271333087499, guid: 04de738577417554e8299204a5cfb108, type: 3}
   equipSlot: 4
   specificEquipment: 4
   prefab: {fileID: -691731671329532804, guid: 2e6adbb3bf154a846a49bb01bc98fb75, type: 3}
-  ArmorPowerEquipment: 0
+  ArmorPowerEquipment: 200
   AttackPowerEquipment: 10
   "Element\u0421oefficient": 0
   RandomPercentage: 

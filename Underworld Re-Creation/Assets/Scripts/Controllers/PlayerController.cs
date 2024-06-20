@@ -7,17 +7,30 @@ using UnityEngine.AI;
 
 public class playerController : MonoBehaviour
 {
-    
+    #region Singleton
+
+    public static playerController instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
+
+    #endregion
+    // ------------------------Область Параметров Обьектов----------------------------------
     Animator animator;
     NavMeshAgent agent;
-
     Vector3 _prevPosition;
 
+    public GameObject dropPoint; // точка для выкидывания предмета
+    public GameObject Focus; //для определения что если мы указали на предмет то когда подойдём то нужно его взять в инвентарь
+
+    // ------------------------Область Параметров Абилок----------------------------------
     public GameObject arrowPrefab; // Префаб стрелы
     public Transform bowTransform; // Точка, откуда выпускается стрела
     public float arrowSpeed = 1f; // Скорость полета стрелы
 
-    public GameObject Focus; //для определения что если мы указали на предмет то когда подойдём то нужно его взять в инвентарь
+    public bool OnOff = true; // переменная которая недомускает запус следущей абилки если не закончена придедущая
 
     void Start()
     {
@@ -33,7 +46,7 @@ public class playerController : MonoBehaviour
 
         RaycastHit hit; //
         //при нажатии мыши персонаж бежит в точку где была нажата мышь
-        if (Physics.Raycast(ray, out hit,500)&&Input.GetMouseButtonDown(1)) 
+        if (Physics.Raycast(ray, out hit,500)&&Input.GetMouseButton(1)) 
         {         
             agent.SetDestination(hit.point);//вводим координаты
             animator.SetBool("Run", true);//запускаем анимацию бега

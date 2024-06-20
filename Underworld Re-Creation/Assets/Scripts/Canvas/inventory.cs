@@ -36,7 +36,11 @@ public class Inventory : MonoBehaviour
     public ItemInCanvas[] ProfileSlot;
 
     bool OneUse; // требуется для загрузки, тоесть для того чтобы передать в инвентарь вещи из сохранения
-  
+
+    public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);  // делегат чтобы изменять характеристики при одевании и снятии предметов экипировки
+    public event OnEquipmentChanged onEquipmentChanged;
+
+
     void Start()
     {
         cells = new Cell[SizeX, SizeY];

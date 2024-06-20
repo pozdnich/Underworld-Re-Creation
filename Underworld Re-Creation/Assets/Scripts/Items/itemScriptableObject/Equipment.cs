@@ -12,6 +12,8 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Equipment")]
 public class Equipment : Item {
 
+   
+
 	public EquipmentSlot equipSlot;     // What slot to equip it in В какой слот установить
 
     public SpecificEquipment specificEquipment;
@@ -48,6 +50,7 @@ public class Equipment : Item {
 
     public List<int> StatsValues = new List<int>() { Force, Intelligence, Agility, Vitality, armorEquipBonus, HealthRecovery, ManaRegeneration, AmountOfHealthBonus, AmountOfManaBonus, AmountOfHealth, AmountOfMana, Dodge, Luck, AbilityСastingSpeed, Accuracy, CriticalHitPercentage };
     public List<bool> StatsAccess;
+    
 
     // Called when pressed in the inventory Вызывается при нажатии в инвентаре
     public override void Use ()
@@ -67,4 +70,4 @@ public class Equipment : Item {
 
 public enum EquipmentSlot { Head, Chest, Legs, Feet, Weapon, SecondaryWeapon, Amulet}
                             //Тканевая броня, Кожаная броня, Тяжёлая броня, Топор, Меч, Молот, Палочка, Посох, Двуручный лук, Одноручный арбалет, Двуручный арбалет, Щит, Книга заклинаний, Колчан
-public enum SpecificEquipment { ClothArmor, LeatherArmor, HeavyArmor, Axe, Sword, Hammer, Wand, Staff, TwoHandedBow, OneHandedCrossbow, TwoHandedCrossbow, Shield, Spellbook, Quiver }
+public enum SpecificEquipment { ClothArmor, LeatherArmor, HeavyArmor, AxeOne, SwordOne, Hammer, Wand, Staff, TwoHandedBow, OneHandedCrossbow, TwoHandedCrossbow, Shield, Spellbook, Quiver }

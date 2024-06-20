@@ -9,18 +9,22 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
 {
     public Itemtype itemtype;
     public Equipment item;
+    private Equipment originalItem; // Оригинальное состояние предмета
+
     public Inventory inventory; // объект inventory для работы с ним
     public Canvas canvas; // canvas с которым работает именно инвентарь
     public Cell PrevCell; // клетка в которой находится предмет в инвентаре
     public CellEquipped PrevCellEquipped; // клетка в которой находится предмет в профиле
     RectTransform rectTransform; // Прямое преобразование
     public CanvasGroup canvasGroup; // для управления в canvasGroup
+    
 
     Vector2 positionItem; // координаты item
     public ItemSize Size; // енуминатор для определения размера предметов (количества занимаемых клеток)
 
     void Start()
     {
+        
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         GetComponent<Image>().sprite = item.icon;
@@ -35,6 +39,8 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
             inventory = GetComponentInParent<Inventory>();
             Debug.LogError($"Inventory не назначен в инспекторе и не найден в родительских объектах. {name}");
         }
+        
+        originalItem = Instantiate(item);
     }
 
     // что происходит при первом опускании кнопки мыши
@@ -74,9 +80,11 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         Cell targetCell = null;
         CellEquipped targetCellEquipped = null;
         bool isOverInventoryCell = false;
+        bool PermissionToThrowAway = false;
 
         foreach (RaycastResult result in hitResults)
         {
+            Debug.Log($"{result.gameObject.tag.ToString()} {hitResults.Count}");
             if (result.gameObject.CompareTag("CellInventory"))
             {
                 targetCell = result.gameObject.GetComponent<Cell>();
@@ -89,6 +97,11 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
                 isOverInventoryCell = true;
                 break;
             }
+            if (result.gameObject.CompareTag("AreaForThrowingItems"))
+            {
+                PermissionToThrowAway = true;
+                break;
+            }
         }
 
         // Проверка, что предмет находится над ячейкой и ячейка свободна
@@ -99,15 +112,21 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         {
             Debug.Log("Не соблюдено условие, возврат на прежнее место.");
             // Возвращаем предмет в предыдущую ячейку
-            if (PrevCell != null)
+            if (PrevCell != null && !PermissionToThrowAway)
             {
                 SetPosition(this, PrevCell);
                 Debug.Log("PrevCell != null");
             }
-            else if (PrevCellEquipped != null)
+            else if (PrevCellEquipped != null && !PermissionToThrowAway)
             {
                 SetPositionInProfile(this, PrevCellEquipped);
                 Debug.Log("PrevCellEquipped != null");
+            }
+            else 
+            {
+                Debug.Log("Предмет Над выбрасыванием");
+                // Если предмет не над ячейкой и не был ранее в инвентаре или профиле, выбросить его
+               ThrowItemAway();
             }
         }
         else
@@ -197,7 +216,11 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
 
         item.transform.localPosition = newPos;
         item.transform.SetParent(canvas.GetComponent<Inventory>().transformItems);
-        inventory.Items.Add(item);
+        if (!inventory.Items.Contains(this))
+        {
+            inventory.Items.Add(item);
+        }
+      
         inventory.ProfileSlot[(int)item.item.equipSlot] = null;
         inventory.CellsOccupation(cell, item.Size, false);
         inventory.UpdateCellsColor();
@@ -237,7 +260,7 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
             Debug.LogError("Inventory не найден для SetInitialPosition");
         }
     }
-
+    // передача предмета из инвенторя в профиль игрока
     public void SetPositionInProfile(ItemInCanvas item, CellEquipped cell)
     {
         item.transform.SetParent(cell.transform);
@@ -245,6 +268,23 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         item.transform.SetParent(cell.GetComponentInParent<Transform>().transform);
         inventory.ProfileSlot[(int)item.item.equipSlot] = item;
         inventory.Items.Remove(item);
+        inventory.UpdateCellsColor();
+    }
+
+    // Выбрасывание Предмета на землю
+    public void ThrowItemAway()
+    {
+        // Получаем текущую позицию dropPoint
+        Vector3 position = playerController.instance.dropPoint.transform.position;
+
+        // Создаем лут-объект в мире на основе оригинального состояния предмета
+        GameObject loot = Instantiate(item.AllThisItem, position, Quaternion.identity);
+
+        // Восстанавливаем исходное состояние предмета
+        item = originalItem;
+
+        // Удаляем текущий объект из инвентаря
+        Destroy(gameObject);
         inventory.UpdateCellsColor();
     }
 }

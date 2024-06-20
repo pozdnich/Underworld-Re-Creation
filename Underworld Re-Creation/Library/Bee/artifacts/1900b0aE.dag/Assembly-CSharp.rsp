@@ -376,6 +376,7 @@
 "Assets/Scripts/Items/itemScriptableObject/Item.cs"
 "Assets/Scripts/Items/itemSize.cs"
 "Assets/Scripts/MeshFromSkinnedMesh.cs"
+"Assets/Scripts/Stats/CharStats.cs"
 "Assets/Scripts/Stats/Stat.cs"
 "Assets/Scripts/Stats/StatModifier.cs"
 -langversion:9.0

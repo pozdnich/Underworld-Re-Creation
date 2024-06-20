@@ -9,6 +9,7 @@ TagManager:
   - 'Earth '
   - Item
   - CellEquipped
+  - AreaForThrowingItems
   layers:
   - Default
   - TransparentFX

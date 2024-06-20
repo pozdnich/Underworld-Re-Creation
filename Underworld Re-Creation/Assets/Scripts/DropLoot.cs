@@ -12,7 +12,11 @@ public class DropLoot : MonoBehaviour
 
         Vector3 poz = LootStart.GetComponent<Transform>().position;
         int l = UnityEngine.Random.Range(0, Loot.Count - 1);
-        GameObject loot = Instantiate(Loot[l], poz, Quaternion.identity);
+        Loot[l].GetComponentInChildren<ItemInCanvas>().item.AllThisItem = Loot[l]; // присвоили его образ его партаметру AllThisItem чтобы можно было его спокойно выкидывать из инвенторя и обратно подымать в инвентарь
+        
+        Loot[l].GetComponentInChildren<ItemInCanvas>().item.AllThisItem.GetComponentInChildren<ItemInCanvas>().item.ArmorPowerEquipment = 200; // пример рамндомной настройки предмета
+        
+        GameObject loot = Instantiate(Loot[l].GetComponentInChildren<ItemInCanvas>().item.AllThisItem, poz, Quaternion.identity);
     }
 
     // Update is called once per frame

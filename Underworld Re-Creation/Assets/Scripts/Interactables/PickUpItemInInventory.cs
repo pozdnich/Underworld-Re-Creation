@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PickUpItemInInventory : MonoBehaviour
 {
-    
+    public void Start()
+    {
+      
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,8 +21,9 @@ public class PickUpItemInInventory : MonoBehaviour
             {
                 Debug.Log("Предмет был взят в фокус");
                 Inventory.instance.AddItem(GetComponentInChildren<ItemInCanvas>());
+
                 // Пишем надпись о соприкосновении
-                Debug.Log("Игрок положил в инвентарь предмет!");
+                Debug.Log($"Игрок положил в инвентарь предмет!{GetComponentInChildren<ItemInCanvas>().item.name}");
                 Destroy(gameObject);
             }
         }
