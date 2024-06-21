@@ -6,6 +6,7 @@ public class CanvasController : MonoBehaviour
 {
     public GameObject inventoryUI;
     public GameObject ProfileUI;
+    public GameObject SkillTree;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,20 @@ public class CanvasController : MonoBehaviour
         {
 
             ProfileUI.SetActive(!ProfileUI.activeSelf);
+
+        }
+        if (Input.GetButtonDown("SkillTree"))
+        {
+            if (inventoryUI.active)
+            {
+                inventoryUI.SetActive(!inventoryUI.activeSelf);
+            }
+            if (ProfileUI.active)
+            {
+                ProfileUI.SetActive(!ProfileUI.activeSelf);
+            }
+            
+            SkillTree.SetActive(!SkillTree.activeSelf);
 
         }
     }

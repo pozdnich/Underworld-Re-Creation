@@ -10,6 +10,8 @@ TagManager:
   - Item
   - CellEquipped
   - AreaForThrowingItems
+  - CellSkill
+  - Skill
   layers:
   - Default
   - TransparentFX
