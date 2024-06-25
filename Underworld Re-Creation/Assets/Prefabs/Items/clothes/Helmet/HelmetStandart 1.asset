@@ -15,9 +15,10 @@ MonoBehaviour:
   name: HelmetStandart
   icon: {fileID: 21300000, guid: 3bedf73f5d9175545a318925e0bf32ad, type: 3}
   showInInventory: 1
+  AllThisItem: {fileID: 0}
   equipSlot: 0
   specificEquipment: 2
-  prefab: {fileID: 6924925143565299553, guid: 902128ad20c19934aa196546916dacba, type: 3}
+  prefab: {fileID: 660657274276892902, guid: 9db7844f73f2de440a9e2c7202e8c96a, type: 3}
   ArmorPowerEquipment: 10
   AttackPowerEquipment: 0
   "Element\u0421oefficient": 0

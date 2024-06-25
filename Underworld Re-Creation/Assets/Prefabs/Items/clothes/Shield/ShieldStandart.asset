@@ -15,9 +15,10 @@ MonoBehaviour:
   name: ShieldStandart
   icon: {fileID: 21300000, guid: 3046189b3826155499d08d5c6af2fdf5, type: 3}
   showInInventory: 1
+  AllThisItem: {fileID: 0}
   equipSlot: 5
   specificEquipment: 11
-  prefab: {fileID: 8331640597266308243, guid: 9075d762d062c7b428138e334ad76389, type: 3}
+  prefab: {fileID: 3671788304887804938, guid: 9075d762d062c7b428138e334ad76389, type: 3}
   ArmorPowerEquipment: 10
   AttackPowerEquipment: 0
   "Element\u0421oefficient": 0

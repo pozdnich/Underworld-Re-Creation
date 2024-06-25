@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
 
     public List<ItemInCanvas> initialItems; // Список предметов для добавления при запуске(надо будет потом избавится и настроить загрузку от Items)
     public List<ItemInCanvas> Items; // Список предметов которыми заправляет игрок
-    public ItemInCanvas[] ProfileSlot;
+    public ItemInCanvas[] ProfileSlot; //Слоты профиля
 
     bool OneUse; // требуется для загрузки, тоесть для того чтобы передать в инвентарь вещи из сохранения
 

@@ -31,6 +31,7 @@ public class SkillDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
         // Устанавливаем иконку умения
         iconImage.sprite = skill.iconSprite;
+        iconImage.color = new Color(1f, 1f, 1f, 1f); // Устанавливаем полную яркость и непрозрачность
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -42,6 +43,7 @@ public class SkillDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
         Image image = dragIcon.AddComponent<Image>();
         image.sprite = iconImage.sprite;
+        image.color = iconImage.color; // Копируем настройки цвета
         image.raycastTarget = false;
 
         dragRectTransform = dragIcon.GetComponent<RectTransform>();
@@ -51,7 +53,6 @@ public class SkillDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         dragRectTransform.position = eventData.position;
         dragRectTransform.pivot = new Vector2(0.5f, 0.5f);
 
-        canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
     }
 
@@ -65,7 +66,6 @@ public class SkillDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
         List<RaycastResult> hitResults = new List<RaycastResult>();
@@ -75,28 +75,40 @@ public class SkillDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         raycaster.Raycast(pointerEventData, hitResults);
 
         SkillSlot slot = null;
-        bool isOverInventoryCell = false;
+        bool isOverSkillCell = false;
 
+        // Проверка на попадание в ячейку с навыком
         foreach (RaycastResult result in hitResults)
         {
             if (result.gameObject.CompareTag("CellSkill"))
             {
                 slot = result.gameObject.GetComponent<SkillSlot>();
-                isOverInventoryCell = true;
+                isOverSkillCell = true;
                 break;
             }
         }
 
-        if (!isOverInventoryCell)
+        if (!isOverSkillCell)
         {
-            // Вернуть иконку на исходную позицию
+            // Вернуть иконку на исходную позицию, если не над ячейкой
             rectTransform.anchoredPosition = startPosition;
         }
         else
         {
             if (slot != null)
             {
-                slot.SetSkill(skill);
+                // Удаление старого слота с тем же навыком, если он существует
+                foreach (SkillSlot one in playerController.instance.skillSlots)
+                {
+                    if (one.skill != null && skill != null && one.skill.name == skill.name)
+                    {
+                       
+                        one.SetSkill(skill, false);
+                        break;
+                    }
+                }
+                // Установка нового навыка в слот
+                slot.SetSkill(skill,true);
             }
         }
 

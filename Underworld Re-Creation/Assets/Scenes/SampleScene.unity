@@ -655,7 +655,7 @@ GameObject:
   - component: {fileID: 310869883}
   - component: {fileID: 310869882}
   m_Layer: 5
-  m_Name: Skill Slot 2
+  m_Name: Skill Slot 1
   m_TagString: CellSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -693,6 +693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 310869883}
+  skill: {fileID: 0}
 --- !u!114 &310869883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -744,7 +745,7 @@ GameObject:
   - component: {fileID: 430946295}
   - component: {fileID: 430946294}
   m_Layer: 5
-  m_Name: Skill Slot 6
+  m_Name: Skill Slot 5
   m_TagString: CellSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -782,6 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 430946295}
+  skill: {fileID: 0}
 --- !u!114 &430946295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,7 +1275,7 @@ GameObject:
   - component: {fileID: 612731030}
   - component: {fileID: 612731029}
   m_Layer: 5
-  m_Name: Skill Slot 5
+  m_Name: Skill Slot 4
   m_TagString: CellSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1311,6 +1313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 612731030}
+  skill: {fileID: 0}
 --- !u!114 &612731030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2367,7 +2370,7 @@ GameObject:
   - component: {fileID: 1181474954}
   - component: {fileID: 1181474953}
   m_Layer: 5
-  m_Name: Skill Slot 4
+  m_Name: Skill Slot 3
   m_TagString: CellSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2405,6 +2408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 1181474954}
+  skill: {fileID: 0}
 --- !u!114 &1181474954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3831,11 +3835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LootStart: {fileID: 1959451536}
   Loot:
-  - {fileID: 158725696302654286, guid: 71f983cd655491547a5c4facce610d02, type: 3}
-  - {fileID: 5182814271333087499, guid: 04de738577417554e8299204a5cfb108, type: 3}
-  - {fileID: 2461420767548184257, guid: cb98aa443eb01d948b139f56c6c430cb, type: 3}
-  - {fileID: 1429756576660245603, guid: e4c762fc4e299444c99aad26c1b99465, type: 3}
-  - {fileID: 7814312152155105948, guid: 9db7844f73f2de440a9e2c7202e8c96a, type: 3}
+  - {fileID: 4032634131351281784, guid: e53ade51e34dbe74a884049c9dacfaa1, type: 3}
 --- !u!4 &1959451538
 Transform:
   m_ObjectHideFlags: 0
@@ -3960,7 +3960,7 @@ GameObject:
   - component: {fileID: 1987274328}
   - component: {fileID: 1987274327}
   m_Layer: 5
-  m_Name: Skill Slot 3
+  m_Name: Skill Slot 2
   m_TagString: CellSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3998,6 +3998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 1987274328}
+  skill: {fileID: 0}
 --- !u!114 &1987274328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4625,7 +4626,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2144988730
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5575,7 +5576,7 @@ GameObject:
   - component: {fileID: 6473226704395877150}
   - component: {fileID: 6473226704395877151}
   m_Layer: 5
-  m_Name: Skill Slot 1
+  m_Name: Skill Slot 0
   m_TagString: CellSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7049,10 +7050,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropPoint: {fileID: 94943448}
   Focus: {fileID: 0}
+  currentMeshes: []
+  targetMesh: {fileID: 1856454152621479534}
   arrowPrefab: {fileID: 1314373849333916219, guid: e417bf90660e9c64a8d73fa09408c23b, type: 3}
   bowTransform: {fileID: 590913899}
   arrowSpeed: 10
   OnOff: 1
+  skillSlots:
+  - {fileID: 6473226704395877151}
+  - {fileID: 310869882}
+  - {fileID: 1987274327}
+  - {fileID: 1181474953}
+  - {fileID: 612731029}
+  - {fileID: 430946294}
 --- !u!195 &6351623946433854501
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7189,6 +7199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 6473226704395877150}
+  skill: {fileID: 0}
 --- !u!1 &6491112219819507409
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,5 +10,7 @@ public class Skill : ScriptableObject
     public Sprite iconSprite;
     public int MinLevel;
     public SpecificEquipment[] NecessaryEquipment;
+    public float SkillNumber;
+
 
 }

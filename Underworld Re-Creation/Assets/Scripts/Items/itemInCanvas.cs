@@ -174,6 +174,7 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
                     inventory.UpdateCellsColor();
                 }
                 PrevCell = null;
+                playerController.instance.AttachToMesh(item.prefab, (int)targetCellEquipped.TypeOfEquipment);
             }
         }
     }

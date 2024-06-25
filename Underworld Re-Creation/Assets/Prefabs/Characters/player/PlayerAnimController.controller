@@ -7,7 +7,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Attack
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8983488468561136170}
   m_Solo: 0
@@ -39,25 +42,25 @@ BlendTree:
     m_DirectBlendParameter: Weapon
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 5312544184684201664}
-    m_Threshold: 3
+    m_Motion: {fileID: 3080158563616170648}
+    m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Weapon
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 3080158563616170648}
-    m_Threshold: 4
+    m_Motion: {fileID: 5312544184684201664}
+    m_Threshold: 2
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Weapon
     m_Mirror: 0
-  m_BlendParameter: Weapon
+  m_BlendParameter: SkillNumber
   m_BlendParameterY: SpeedPlayer
   m_MinThreshold: 0
-  m_MaxThreshold: 4
+  m_MaxThreshold: 2
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -106,7 +109,7 @@ BlendTree:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Unarmed
+  m_Name: Normal Attack
   m_Childs:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 706e1297326c57245983d4c95462b8ba, type: 2}
@@ -117,14 +120,14 @@ BlendTree:
     m_DirectBlendParameter: Weapon
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: a21da0008965282419540cfd4ca39bc5, type: 2}
+    m_Motion: {fileID: 0}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
-    m_DirectBlendParameter: Weapon
+    m_DirectBlendParameter: SkillNumber
     m_Mirror: 0
-  m_BlendParameter: NumAttackAbility
+  m_BlendParameter: NumWeapon
   m_BlendParameterY: Weapon
   m_MinThreshold: 0
   m_MaxThreshold: 1
@@ -165,7 +168,7 @@ AnimatorController:
   m_Name: PlayerAnimController
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Weapon
+  - m_Name: SkillNumber
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -177,7 +180,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: NumAttackAbility
+  - m_Name: NumWeapon
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -185,6 +188,12 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: SpeedPlayer
     m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: Attack
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -276,28 +285,20 @@ BlendTree:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SwordOne
+  m_Name: Puncture
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 0}
-    m_Threshold: 0
+    m_Motion: {fileID: 7400000, guid: c8bc84f444303f146a77906fe2699d7f, type: 2}
+    m_Threshold: 4
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Weapon
     m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: 0}
-    m_Threshold: 1
-    m_Position: {x: 0, y: 0}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: Weapon
-    m_Mirror: 0
-  m_BlendParameter: NumAttackAbility
+  m_BlendParameter: NumWeapon
   m_BlendParameterY: Weapon
-  m_MinThreshold: 0
-  m_MaxThreshold: 1
+  m_MinThreshold: 4
+  m_MaxThreshold: 4
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -307,10 +308,10 @@ BlendTree:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AxeOne
+  m_Name: Stan
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 0}
+    m_Motion: {fileID: 7400000, guid: a21da0008965282419540cfd4ca39bc5, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -325,7 +326,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: Weapon
     m_Mirror: 0
-  m_BlendParameter: NumAttackAbility
+  m_BlendParameter: NumWeapon
   m_BlendParameterY: Weapon
   m_MinThreshold: 0
   m_MaxThreshold: 1

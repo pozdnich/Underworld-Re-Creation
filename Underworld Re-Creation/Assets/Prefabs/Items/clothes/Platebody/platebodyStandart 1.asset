@@ -15,10 +15,11 @@ MonoBehaviour:
   name: platebodyStandart
   icon: {fileID: 21300000, guid: c77f682c0a9768b42b437999d02b12c6, type: 3}
   showInInventory: 1
+  AllThisItem: {fileID: 906616540598997457, guid: 21f40d9f27d5e4d44bcfa8432b1ac590, type: 3}
   equipSlot: 1
   specificEquipment: 2
-  prefab: {fileID: -5567777601266415393, guid: 3eadc3f9731afa44cb066484f587e677, type: 3}
-  ArmorPowerEquipment: 20
+  prefab: {fileID: 2958536279548437888, guid: 3eadc3f9731afa44cb066484f587e677, type: 3}
+  ArmorPowerEquipment: 200
   AttackPowerEquipment: 0
   "Element\u0421oefficient": 0
   RandomPercentage: 

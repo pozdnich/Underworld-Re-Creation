@@ -15,10 +15,11 @@ MonoBehaviour:
   name: PlatelegsStandart
   icon: {fileID: 21300000, guid: ab4507a6b963c774b8ddaed203991e57, type: 3}
   showInInventory: 1
+  AllThisItem: {fileID: 4032634131351281784, guid: e53ade51e34dbe74a884049c9dacfaa1, type: 3}
   equipSlot: 2
   specificEquipment: 2
-  prefab: {fileID: 261266498205314489, guid: c21ace5ad809f3e4087136fd3c3c0431, type: 3}
-  ArmorPowerEquipment: 15
+  prefab: {fileID: 8304893866298240653, guid: cb98aa443eb01d948b139f56c6c430cb, type: 3}
+  ArmorPowerEquipment: 200
   AttackPowerEquipment: 0
   "Element\u0421oefficient": 0
   RandomPercentage: 
