@@ -7,15 +7,16 @@ using UnityEngine.UI;
 public class SkillDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Skill skill; // ”мение, которое перетаскиваетс€
-    private Image iconImage;
-    private Canvas canvas;
-    private RectTransform rectTransform;
-    private CanvasGroup canvasGroup;
-    private Vector2 startPosition;
+    private Image iconImage; // иконка умени€
+    private Canvas canvas; // дл€ работы со всем Canvas
+    private RectTransform rectTransform;  // ѕр€мое преобразование
+    private CanvasGroup canvasGroup; // дл€ управлени€ в canvasGroup
+    private Vector2 startPosition; //ѕозици€ умени€
+    
+    private GameObject dragIcon;// ƒубликат иконки дл€ перетаскивани€
+    private RectTransform dragRectTransform;  // ѕр€мое преобразование дубликата
 
-    // ƒубликат иконки дл€ перетаскивани€
-    private GameObject dragIcon;
-    private RectTransform dragRectTransform;
+    private bool isDragging = false; // ‘лаг дл€ отслеживани€ перетаскивани€
 
     private void Start()
     {
@@ -33,9 +34,27 @@ public class SkillDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         iconImage.sprite = skill.iconSprite;
         iconImage.color = new Color(1f, 1f, 1f, 1f); // ”станавливаем полную €ркость и непрозрачность
     }
+    // ≈сли при перетаскивании умени€ игрок закроет ƒрево умений
+    private void OnDisable()
+    {
+        if (isDragging)
+        {
+            canvasGroup.blocksRaycasts = true;
+            // ”дал€ем дубликат иконки
+            if (dragIcon != null)
+            {
+                Destroy(dragIcon);
+            }
 
+            // ¬ернуть иконку на исходную позицию
+            rectTransform.anchoredPosition = startPosition;
+        }
+
+    }
+    // ћомент начала перетаскивани€ 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        isDragging = true;
         // —оздаем дубликат иконки дл€ перетаскивани€
         dragIcon = new GameObject("DragIcon");
         dragIcon.transform.SetParent(canvas.transform, false);
@@ -55,7 +74,7 @@ public class SkillDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
         canvasGroup.blocksRaycasts = false;
     }
-
+    // что происходит во врем€ перетаскивани€
     public void OnDrag(PointerEventData eventData)
     {
         if (dragIcon != null)
@@ -63,9 +82,10 @@ public class SkillDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             dragRectTransform.position = eventData.position;
         }
     }
-
+    // конец перетаскивани€
     public void OnEndDrag(PointerEventData eventData)
     {
+        isDragging = false;
         canvasGroup.blocksRaycasts = true;
 
         List<RaycastResult> hitResults = new List<RaycastResult>();

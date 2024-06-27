@@ -12,6 +12,8 @@ TagManager:
   - AreaForThrowingItems
   - CellSkill
   - Skill
+  - InventoryItemsCanvas
+  - ProfileItemsAndStatsCanvas
   layers:
   - Default
   - TransparentFX

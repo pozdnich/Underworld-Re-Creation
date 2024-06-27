@@ -26,8 +26,8 @@ public class playerController : MonoBehaviour
     public GameObject dropPoint; // точка для выкидывания предмета
     public GameObject Focus; //для определения что если мы указали на предмет то когда подойдём то нужно его взять в инвентарь
 
-    public SkinnedMeshRenderer[] currentMeshes;
-    public SkinnedMeshRenderer targetMesh;
+    public SkinnedMeshRenderer[] currentMeshes; // массив мешей предметов которые должны весеть на персонаже
+    public SkinnedMeshRenderer targetMesh; //меш персонажа
 
     // ------------------------Область Параметров Абилок----------------------------------
     public GameObject arrowPrefab; // Префаб стрелы
@@ -35,13 +35,13 @@ public class playerController : MonoBehaviour
     public float arrowSpeed = 1f; // Скорость полета стрелы
 
     public bool OnOff = true; // переменная которая недомускает запус следущей абилки если не закончена придедущая
-    public SkillSlot[] skillSlots;
+    public SkillSlot[] skillSlots; // слоты умений у игрока
 
     void Start()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        int numSlots = 7;
+        int numSlots = 7; // количество слотов мешей
         currentMeshes = new SkinnedMeshRenderer[numSlots];
     }
 
@@ -112,7 +112,7 @@ public class playerController : MonoBehaviour
         }
 
     }
-
+    // метод одевания меш предмета
     public void AttachToMesh(SkinnedMeshRenderer mesh, int slotIndex)
     {
         if (currentMeshes[slotIndex] != null)
@@ -125,7 +125,15 @@ public class playerController : MonoBehaviour
         newMesh.rootBone = targetMesh.rootBone;
         currentMeshes[slotIndex] = newMesh;
     }
+    // метод  полного снятия меш предмета
+    public void DestroyAttachToMesh(SkinnedMeshRenderer mesh, int slotIndex)
+    {
+        if (currentMeshes[slotIndex] != null)
+        {
+            Destroy(currentMeshes[slotIndex].gameObject);
+        }
 
+    }
 
 
     //метод полёта обьекта(по типу стрелы или фаербола)

@@ -2063,8 +2063,8 @@ GameObject:
   - component: {fileID: 973097623}
   - component: {fileID: 973097622}
   m_Layer: 5
-  m_Name: Profile
-  m_TagString: Untagged
+  m_Name: ProfileItemsAndStatsCanvas
+  m_TagString: ProfileItemsAndStatsCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2593,8 +2593,8 @@ GameObject:
   - component: {fileID: 1234361470}
   - component: {fileID: 1234361469}
   m_Layer: 5
-  m_Name: InventoryItems
-  m_TagString: Untagged
+  m_Name: InventoryItemsCanvas
+  m_TagString: InventoryItemsCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2753,6 +2753,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1298522420}
   m_CullTransparentMesh: 1
+--- !u!1 &1339795412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1339795414}
+  - component: {fileID: 1339795413}
+  m_Layer: 0
+  m_Name: LootStart (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1339795413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339795412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca434f7e5c98b746ad943967dde1587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LootStart: {fileID: 1339795412}
+  Loot:
+  - {fileID: 4032634131351281784, guid: e53ade51e34dbe74a884049c9dacfaa1, type: 3}
+--- !u!4 &1339795414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339795412}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 308.724, y: 1.825, z: -295.687}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1427229726
 GameObject:
   m_ObjectHideFlags: 0
@@ -4037,6 +4084,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1987274325}
   m_CullTransparentMesh: 1
+--- !u!1 &2030187781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2030187783}
+  - component: {fileID: 2030187782}
+  m_Layer: 0
+  m_Name: LootStart (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2030187782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030187781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca434f7e5c98b746ad943967dde1587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LootStart: {fileID: 2030187781}
+  Loot:
+  - {fileID: 4032634131351281784, guid: e53ade51e34dbe74a884049c9dacfaa1, type: 3}
+--- !u!4 &2030187783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030187781}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 310.077, y: 1.825, z: -294.27}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2047407081 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1694842655666540787, guid: b373ce74bb29e7345b8ccaff7037dd50, type: 3}
@@ -8259,3 +8353,5 @@ SceneRoots:
   - {fileID: 1798946726}
   - {fileID: 36666219}
   - {fileID: 1959451538}
+  - {fileID: 1339795414}
+  - {fileID: 2030187783}

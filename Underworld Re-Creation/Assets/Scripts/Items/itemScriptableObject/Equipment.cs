@@ -14,9 +14,9 @@ public class Equipment : Item {
 
    
 
-	public EquipmentSlot equipSlot;     // What slot to equip it in В какой слот установить
+	public EquipmentSlot equipSlot;     //  В какой слот установить
 
-    public SpecificEquipment specificEquipment;
+    public SpecificEquipment specificEquipment; // определение типа предмета
     public SkinnedMeshRenderer prefab;
     //Количество брони что даёт данная экиперовка
     public int ArmorPowerEquipment;
@@ -52,13 +52,13 @@ public class Equipment : Item {
     public List<bool> StatsAccess;
     
 
-    // Called when pressed in the inventory Вызывается при нажатии в инвентаре
+    // Вызывается при нажатии в инвентаре
     public override void Use ()
 	{
-		// Equip Оборудовать
+		//  Оборудовать
 
 
-        // Remove from inventory Удалить из инвентаря
+        // Удалить из инвентаря
 
 
     }
@@ -67,7 +67,7 @@ public class Equipment : Item {
 
    
 }
-
+                        // Голова, Грудь, Ноги, Ступни, Оружие, Вторичное оружие, Амулет
 public enum EquipmentSlot { Head, Chest, Legs, Feet, Weapon, SecondaryWeapon, Amulet}
                             //Тканевая броня, Кожаная броня, Тяжёлая броня, Топор, Меч, Молот, Палочка, Посох, Двуручный лук, Одноручный арбалет, Двуручный арбалет, Щит, Книга заклинаний, Колчан
 public enum SpecificEquipment { ClothArmor, LeatherArmor, HeavyArmor, AxeOne, SwordOne, Hammer, Wand, Staff, TwoHandedBow, OneHandedCrossbow, TwoHandedCrossbow, Shield, Spellbook, Quiver }

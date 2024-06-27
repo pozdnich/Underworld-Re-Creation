@@ -7,15 +7,15 @@ using UnityEngine.UI;
 public class SkillSlot : MonoBehaviour
 {
     public Image iconImage; // UI Image компонент для отображения иконки умения
-    public Skill skill;
-    private Color colorG;
+    public Skill skill; // параметры скила
+    private Color colorG; // требуется для сохранения изначального цвета скила
 
     private void Start()
     {
         colorG = iconImage.color;
     }
 
-
+    // метод для изменения скила в слоте
     public void SetSkill(Skill newSkill,bool Add)
     {
         skill = newSkill;
@@ -34,7 +34,7 @@ public class SkillSlot : MonoBehaviour
             iconImage.color = colorG;
         }
     }
-
+    // метод для вызова параметров скила
     public Skill GetSkill()
     {
         return skill;

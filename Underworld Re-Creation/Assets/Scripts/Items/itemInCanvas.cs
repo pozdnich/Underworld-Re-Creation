@@ -1,3 +1,4 @@
+using sc.terrain.vegetationspawner;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,9 +8,12 @@ using UnityEngine.UI;
 
 public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    public Itemtype itemtype;
-    public Equipment item;
-    private Equipment originalItem; // Оригинальное состояние предмета
+
+    
+    public Itemtype itemtype; //тип предмета (Экиперовка, Расходник или же Ресурс)
+   
+    public Equipment item; // свойства предмета, но надо подумать как их менять в зависимости от типа предмета
+    private Equipment originalItem; // Оригинальное состояние предмета, если это экиперовк
 
     public Inventory inventory; // объект inventory для работы с ним
     public Canvas canvas; // canvas с которым работает именно инвентарь
@@ -22,9 +26,11 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     Vector2 positionItem; // координаты item
     public ItemSize Size; // енуминатор для определения размера предметов (количества занимаемых клеток)
 
+    private bool isDragging = false; // Флаг для отслеживания перетаскивания
+
     void Start()
     {
-        
+      
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         GetComponent<Image>().sprite = item.icon;
@@ -37,35 +43,65 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         if (inventory == null)
         {
             inventory = GetComponentInParent<Inventory>();
-            Debug.LogError($"Inventory не назначен в инспекторе и не найден в родительских объектах. {name}");
+           
         }
         
         originalItem = Instantiate(item);
     }
 
+    
+
     // что происходит при первом опускании кнопки мыши
     public void OnBeginDrag(PointerEventData eventData)
     {
+        isDragging = true;
         canvasGroup.alpha = 0.5f;
         canvasGroup.blocksRaycasts = false;
 
         inventory.draggedItem = this;
         inventory.UpdateCellsColor();
+       
     }
+    // Если при перетаскивании предмета игрок закроет инвентарь или профиль в зависимости от того где лежал предмет
+    private void OnDisable()
+    {
+        if (isDragging)
+        {
+            // Проверка и выполнение действия для PrevCell
+            if (PrevCell != null)
+            {
+                inventory.draggedItem = null;
+                ThrowItemAway();
+                inventory.UpdateCellsColor();
+            }
 
+            // Проверка и выполнение действия для PrevCellEquipped
+            if (PrevCellEquipped != null)
+            {
+                inventory.draggedItem = null;
+                ThrowItemAway();
+                
+            }
+        }
+
+    }
     // что происходит при зажатии кнопки мыши
     public void OnDrag(PointerEventData eventData)
     {
+        
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         if (PrevCell)
         {
             inventory.CellsOccupation(PrevCell, Size, true);
         }
+       
+       
     }
 
     // что происходит при отпускании кнопки мыши
     public void OnEndDrag(PointerEventData eventData)
     {
+        isDragging = false;
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
         inventory.draggedItem = null;
@@ -115,16 +151,16 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
             if (PrevCell != null && !PermissionToThrowAway)
             {
                 SetPosition(this, PrevCell);
-                Debug.Log("PrevCell != null");
+                
             }
             else if (PrevCellEquipped != null && !PermissionToThrowAway)
             {
                 SetPositionInProfile(this, PrevCellEquipped);
-                Debug.Log("PrevCellEquipped != null");
+                
             }
             else 
             {
-                Debug.Log("Предмет Над выбрасыванием");
+               
                 // Если предмет не над ячейкой и не был ранее в инвентаре или профиле, выбросить его
                ThrowItemAway();
             }
@@ -140,11 +176,6 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
                     SetPosition(this, targetCell);
                     PrevCell = targetCell;
 
-                    //if (!cell.isFree)
-                    //{
-                    //    inventory.CellsOccupation(cell, this.Size, true);
-                    //    inventory.UpdateCellsColor();
-                    //}
                 }
                 else
                 {
@@ -160,6 +191,7 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
                     }
 
                     PrevCellEquipped = null;
+                    playerController.instance.DestroyAttachToMesh(item.prefab, (int)targetCellEquipped.TypeOfEquipment);
                 }
             }
             else if (targetCellEquipped != null)
@@ -217,12 +249,16 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
 
         item.transform.localPosition = newPos;
         item.transform.SetParent(canvas.GetComponent<Inventory>().transformItems);
-        if (!inventory.Items.Contains(this))
+        if (!inventory.Items.Contains(item))
         {
             inventory.Items.Add(item);
         }
       
-        inventory.ProfileSlot[(int)item.item.equipSlot] = null;
+        if(PrevCellEquipped != null)
+        {
+            inventory.ProfileSlot[(int)item.item.equipSlot] = null;
+        }
+        
         inventory.CellsOccupation(cell, item.Size, false);
         inventory.UpdateCellsColor();
     }
@@ -283,10 +319,23 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
 
         // Восстанавливаем исходное состояние предмета
         item = originalItem;
+        if (PrevCell != null )
+        {
+            inventory.Items.Remove(this);
+            Destroy(gameObject);
+            inventory.UpdateCellsColor();
 
-        // Удаляем текущий объект из инвентаря
-        Destroy(gameObject);
-        inventory.UpdateCellsColor();
+
+        }
+        if (PrevCellEquipped != null )
+        {
+            playerController.instance.DestroyAttachToMesh(item.prefab, (int)item.equipSlot);
+            inventory.ProfileSlot[(int)item.equipSlot] = null;
+            Destroy(gameObject);
+
+        }
+       
     }
 }
-public enum Itemtype { Equipment, Consumable, Resource }
+
+public enum Itemtype { Equipment, Consumable, Resource } // (Экиперовка,  Расходник,  Ресурс)

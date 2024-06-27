@@ -14,6 +14,7 @@ using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
+    //Удалённый доступ
     #region Singleton
 
     public static Inventory instance;
@@ -262,7 +263,7 @@ public class Inventory : MonoBehaviour
         }
         UpdateCellsColor();
     }
-
+    //Добавление итемов из сохранения, но надо подумать стоит ли так оставлять
     public void AddItem(ItemInCanvas itemPrefab)
     {
         
