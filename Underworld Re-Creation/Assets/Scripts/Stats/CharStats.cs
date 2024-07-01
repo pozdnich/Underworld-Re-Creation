@@ -25,7 +25,7 @@ public class CharStats : MonoBehaviour
     public GameObject TextMP;
    
 
-    public ClassCharacterThisGame classCharacter;
+  
     public ElementPower ElementPowerCharacter;
 
 
@@ -38,7 +38,7 @@ public class CharStats : MonoBehaviour
 
     //--------------------------------------Основные статы-----------------------------------------------------
     public Stat Force;         //Сила
-    public Stat Intelligence;  //Интелект
+    public Stat Intelligence;  //Интеллект
 
     string nameClasStat;
     public Stat ClasStat;      //Переменная принимающая в себя основной стат персонажа
@@ -51,8 +51,11 @@ public class CharStats : MonoBehaviour
 
     //основной стат персонажа
 
-    public Stat IncreasedAttackPower;                       //прирост Сила атаки от 
-    public int DfaultAttackPower;                          //Сила атаки по умолчании
+    public Stat IncreasedAttackPowerFromStrength;                       //прирост Сила атаки от Силы (Для Физической)
+    public int DfaultAttackPowerFromStrength;                          //Сила атаки по умолчании (Для Физической)
+
+    public Stat IncreasedAttackPowerFromIntelligence;                       //прирост Сила атаки от Интелект (Для Магической)
+    public int DfaultAttackPowerFromIntelligence;                          //Сила атаки по умолчании (Для Магической)
     //Ловкость 
     public Stat AbilityСastingSpeed;         //Процент скорости атаки
     public float DfaultAttackSpeed;            //Скорость атаки по умолчании
@@ -157,34 +160,39 @@ public class CharStats : MonoBehaviour
         
         
         //Выбор основного атрибута в зависимости от класса персонажа или если это Enemy
-        switch ((int)classCharacter)
+        //switch ((int)classCharacter)
+        //{
+        //    case 0:
+        //        nameClasStat = "Сила";
+        //        ClasStat = Force;
+               
+        //        break;
+        //    case 1:
+        //        nameClasStat = "Сила";
+        //        ClasStat = Force;
+               
+        //        break;
+        //    case 2:
+        //        nameClasStat = "Сила";
+        //        ClasStat = Force;
+        //        break;
+        //    case 3:
+        //        nameClasStat = "Интелект";
+        //        ClasStat = Intelligence;
+        //        break;
+
+
+        //}
+
+        //Увелечение коэффициента прироста силы атаки на соответствующее количество Основной характеристики Силы
+        for (int i = 1; i <= Force.GetValue(); i++)
         {
-            case 0:
-                nameClasStat = "Сила";
-                ClasStat = Force;
-               
-                break;
-            case 1:
-                nameClasStat = "Сила";
-                ClasStat = Force;
-               
-                break;
-            case 2:
-                nameClasStat = "Сила";
-                ClasStat = Force;
-                break;
-            case 3:
-                nameClasStat = "Интелект";
-                ClasStat = Intelligence;
-                break;
-
-
+            IncreasedAttackPowerFromStrength.AddModifier(1);
         }
-
-        //Увелечение коэффициента прироста силы атаки на соответствующее количество Основной характеристики персонажа
-        for (int i = 1; i <= ClasStat.GetValue(); i++)
+        //Увелечение коэффициента прироста силы атаки на соответствующее количество Основной характеристики Интеллект
+        for (int i = 1; i <= Intelligence.GetValue(); i++)
         {
-            IncreasedAttackPower.AddModifier(1);
+            IncreasedAttackPowerFromIntelligence.AddModifier(1);
         }
         //Увелечение коэффициента прироста скорости атаки на соответствующее количество Основной характеристики ловкости
         for (int i = 1; i <= Agility.GetValue(); i++)
@@ -208,7 +216,7 @@ public class CharStats : MonoBehaviour
 
         //Присвоение для манипуляции со скоростью бега
         navmeshAgent = GetComponent<NavMeshAgent>();
-        navmeshAgent.speed = CalculationCurrentSpeed();
+        //navmeshAgent.speed = CalculationCurrentSpeed();
 
 
         if (TextHP != null && TextMP != null)
@@ -283,16 +291,28 @@ public class CharStats : MonoBehaviour
 
     }
 
-    //Вычесление текущей силы атаки
-    public int CalculationCurrentAttackPower()
+    //Вычесление текущей силы атаки от статы Сила
+    public int CalculationCurrentAttackPowerFromStrength()
     {
-        IncreasedAttackPower.modifiers.Clear();
+        IncreasedAttackPowerFromStrength.modifiers.Clear();
         for (int i = 1; i <= ClasStat.GetValue(); i++)
         {
-            IncreasedAttackPower.AddModifier(1);
+            IncreasedAttackPowerFromStrength.AddModifier(1);
         }
-        return Convert.ToInt32(((float)DfaultAttackPower + (float)AttackPowerEquip.GetValue()) + ((float)DfaultAttackPower + (float)AttackPowerEquip.GetValue()) / (float)100 * (float)IncreasedAttackPower.GetValue());
+        return Convert.ToInt32(((float)DfaultAttackPowerFromStrength + (float)AttackPowerEquip.GetValue()) + ((float)DfaultAttackPowerFromStrength + (float)AttackPowerEquip.GetValue()) / (float)100 * (float)IncreasedAttackPowerFromStrength.GetValue());
     }
+
+    //Вычесление текущей силы атаки от статы Сила
+    public int CalculationCurrentAttackPowerIncreasedAttackPowerFromIntelligence()
+    {
+        IncreasedAttackPowerFromIntelligence.modifiers.Clear();
+        for (int i = 1; i <= ClasStat.GetValue(); i++)
+        {
+            IncreasedAttackPowerFromIntelligence.AddModifier(1);
+        }
+        return Convert.ToInt32(((float)DfaultAttackPowerFromIntelligence + (float)AttackPowerEquip.GetValue()) + ((float)DfaultAttackPowerFromIntelligence + (float)AttackPowerEquip.GetValue()) / (float)100 * (float)IncreasedAttackPowerFromIntelligence.GetValue());
+    }
+
     //Вычесление текущего количества брони
     public int CalculationCurrentArmor()
     {
@@ -339,4 +359,4 @@ public class CharStats : MonoBehaviour
 
 public enum ElementPower { Physical, Fire, Earth, Air, Water, Holy, Dark, Venom }
 
-public enum ClassCharacterThisGame { Enemy, Knight, Archer, Mage }
+

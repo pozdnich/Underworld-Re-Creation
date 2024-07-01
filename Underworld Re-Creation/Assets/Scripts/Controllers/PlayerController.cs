@@ -19,7 +19,8 @@ public class playerController : MonoBehaviour
 
     #endregion
     // ------------------------ќбласть ѕараметров ќбьектов----------------------------------
-    Animator animator;
+    public Animator animatorForIR;
+    public PlayerAnim playerAnim;
     NavMeshAgent agent;
     Vector3 _prevPosition;
 
@@ -39,8 +40,9 @@ public class playerController : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animatorForIR = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        playerAnim = GetComponent<PlayerAnim>();
         int numSlots = 7; // количество слотов мешей
         currentMeshes = new SkinnedMeshRenderer[numSlots];
     }
@@ -54,38 +56,50 @@ public class playerController : MonoBehaviour
         RaycastHit hit; //
         //при нажатии мыши персонаж бежит в точку где была нажата мышь
         if (Physics.Raycast(ray, out hit,500)&&Input.GetMouseButton(1)) 
-        {         
-            agent.SetDestination(hit.point);//вводим координаты
-            animator.SetBool("Run", true);//запускаем анимацию бега
-            agent.Resume();// принудительный запуск перемещени€
-
-
-            Debug.Log(hit.collider.tag);
-            // ≈сли нажали на предмет
-            if (hit.collider.CompareTag("Item"))
+        {
+            
+             if (hit.collider.CompareTag("Enemy")) //если обьект это враг
+            {
+                float cr;
+                if (Inventory.instance.ProfileSlot[4] != null)
+                {
+                    cr = (float)Inventory.instance.ProfileSlot[4].item.specificEquipment;
+                }
+                else
+                {
+                    cr = -1;
+                }
+               
+                playerAnim.PlayAttackMouse1(cr, hit);
+            }else if (hit.collider.CompareTag("Item")) //если обьект это предмет
             {
                 Focus = hit.collider.gameObject;
                 Debug.Log("‘окус вз€т на предмет");
+                agent.SetDestination(hit.point);//вводим координаты
+                animatorForIR.SetBool("Run", true);//запускаем анимацию бега
+                agent.Resume();// принудительный запуск перемещени€
             }
-            else
+            else //в ином случае просто движение в указанную точку
             {
-                Focus = null;
+                agent.SetDestination(hit.point);//вводим координаты
+                animatorForIR.SetBool("Run", true);//запускаем анимацию бега
+                agent.Resume();// принудительный запуск перемещени€
             }
-
+            
 
         }
 
         if (Vector3.Distance(transform.position, agent.destination) < 0.1f)
         {
             agent.Stop();//принудительна€ остановка перемещени€
-            animator.SetBool("Run", false);// отклучение бега
+            animatorForIR.SetBool("Run", false);// отклучение бега
         }
 
         // переход в дереве дл€ плавности анимации (отдых - бег)
         Vector3 curMove = transform.position - _prevPosition;
         float curSpeed = curMove.magnitude / Time.deltaTime;
         _prevPosition = transform.position;
-        animator.SetFloat("SpeedPlayer", curSpeed);
+        animatorForIR.SetFloat("SpeedPlayer", curSpeed);
 
         if (Physics.Raycast(ray, out hit, 500) && Input.GetButtonDown("Ability1"))
         {
@@ -103,9 +117,9 @@ public class playerController : MonoBehaviour
                 }
                 if (DoesTheWeaponMatch)
                 {
-                    animator.SetFloat("SkillNumber", skillSlots[0].skill.SkillNumber);
-                    animator.SetFloat("NumWeapon", (float)Inventory.instance.ProfileSlot[4].item.specificEquipment);
-                    animator.SetTrigger("Attack");
+                    //запуск скила из первой €чейки (надо сделать дл€ всех €чеек)
+                    playerAnim.OnPlayAttack1Ability1(skillSlots[0].skill.SkillNumber);
+                   
                 }
             }
 

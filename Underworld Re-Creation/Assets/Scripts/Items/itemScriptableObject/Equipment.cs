@@ -71,3 +71,4 @@ public class Equipment : Item {
 public enum EquipmentSlot { Head, Chest, Legs, Feet, Weapon, SecondaryWeapon, Amulet}
                             //Тканевая броня, Кожаная броня, Тяжёлая броня, Топор, Меч, Молот, Палочка, Посох, Двуручный лук, Одноручный арбалет, Двуручный арбалет, Щит, Книга заклинаний, Колчан
 public enum SpecificEquipment { ClothArmor, LeatherArmor, HeavyArmor, AxeOne, SwordOne, Hammer, Wand, Staff, TwoHandedBow, OneHandedCrossbow, TwoHandedCrossbow, Shield, Spellbook, Quiver }
+
