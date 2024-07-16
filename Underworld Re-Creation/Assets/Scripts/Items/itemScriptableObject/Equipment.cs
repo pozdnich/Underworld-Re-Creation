@@ -23,8 +23,10 @@ public class Equipment : Item {
     //ñèëà àòàêè îò ıêèïèğîâêè
     public int AttackPowerEquipment;
     //İëåìåíòàëüíûé ïğîöåíò (òîëüêî îäèí + (10 - 25%)
-    // public ElementPower ElWeapon;
-    public int ElementÑoefficient;
+    public ElementPower ElEquipmenResistance;
+    public int ElementÑoefficientResistance;
+    public ElementPower ElEquipmenDamage;
+    public int ElementÑoefficientDamage;
     public int[] RandomPercentage;
 
 

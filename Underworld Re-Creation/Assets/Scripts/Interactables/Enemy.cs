@@ -36,29 +36,31 @@ public class Enemy : MonoBehaviour
 
     public void Update()
     {
-        
-        
-        //if (ShowEnemyHP>0)
-        //{
-        //    if (Player.instance.GetComponent<PlayerController>().EnemyHP.activeSelf != true && Player.instance.GetComponent<PlayerController>().focus == this)
-        //    {
-        //        Player.instance.GetComponent<PlayerController>().EnemyHP.SetActive(true);
-        //        Player.instance.GetComponent<PlayerController>().EnemyHP.GetComponent<UnityEngine.UI.Image>().fillAmount =(float)stats.CalculationCurrentAmountOfHealthMAX();
-        //    }
-        //    else if (Player.instance.GetComponent<PlayerController>().EnemyHP.activeSelf)
-        //    {
-        //        Player.instance.GetComponent<PlayerController>().EnemyHPImage.GetComponent<UnityEngine.UI.Image>().fillAmount = 1.0f / (float)stats.CalculationCurrentAmountOfHealthMAX() * (float)stats.AmountOfHealthCurrent;
-        //        Player.instance.GetComponent<PlayerController>().EnemyHPText.GetComponent<UnityEngine.UI.Text>().text = $"{stats.AmountOfHealthCurrent}/{stats.CalculationCurrentAmountOfHealthMAX()}";
 
-        //    }
-        //    ShowEnemyHP -= Time.deltaTime;
-        //    if (ShowEnemyHP <= 0||Player.instance.GetComponent<PlayerController>().focus != this)
-        //    {
-        //        Player.instance.GetComponent<PlayerController>().EnemyHP.SetActive(false);
-        //        ShowEnemyHP = 0;
-        //    }
-        //}
-       
+
+        if (ShowEnemyHP > 0)
+        {
+            if (playerController.instance.EnemyHP.activeSelf != true && playerController.instance.Focus == this.gameObject)
+            {
+            Debug.Log("ѕоказ здоровь€ противника");
+              
+                playerController.instance.EnemyHP.SetActive(true);
+                playerController.instance.EnemyHP.GetComponent<UnityEngine.UI.Image>().fillAmount = (float)stats.CalculationCurrentAmountOfHealthMAX();
+            }
+            else if (playerController.instance.EnemyHP.activeSelf)
+            {
+                playerController.instance.EnemyHPImage.GetComponent<UnityEngine.UI.Image>().fillAmount = 1.0f / (float)stats.CalculationCurrentAmountOfHealthMAX() * (float)stats.AmountOfHealthCurrent;
+                playerController.instance.EnemyHPText.GetComponent<UnityEngine.UI.Text>().text = $"{stats.AmountOfHealthCurrent}/{stats.CalculationCurrentAmountOfHealthMAX()}";
+
+            }
+            ShowEnemyHP -= Time.deltaTime;
+            if (ShowEnemyHP <= 0 || playerController.instance.Focus != this.gameObject)
+            {
+                playerController.instance.EnemyHP.SetActive(false);
+                ShowEnemyHP = 0;
+            }
+        }
+
     }
 
    
@@ -92,15 +94,31 @@ public class Enemy : MonoBehaviour
        
 
     }
-    // проверка работоспособности выпадени€ предмета при смерти врага
-    private void OnTriggerEnter(Collider other)
+    //проверка работоспособности выпадени€ предмета при смерти врага
+   
+   
+    public void OnTriggerEnter(Collider other)
     {
         Debug.Log("»грок соприкоснулс€ с колайдером ¬рага!");
         // ѕровер€ем, соприкасаетс€ ли коллайдер игрока с предметом
         if (other.CompareTag("Player"))
         {
+            if(other.GetComponent<playerController>().Focus != null && other.GetComponent<playerController>().Focus == this.gameObject) {
+                other.GetComponent<PlayerAnim>().EnemyAndPlayerCollidersTouching = true;
+            }
+           
+            // Die();
 
-            Die();
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+       
+        // ѕровер€ем, соприкасаетс€ ли коллайдер игрока с предметом
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<PlayerAnim>().EnemyAndPlayerCollidersTouching = false;
+            // Die();
 
         }
     }
@@ -110,7 +128,7 @@ public class Enemy : MonoBehaviour
 
         //ragdoll.transform.parent = null;
         //ragdoll.Setup();
-        //Player.instance.GetComponent<PlayerController>().EnemyHP.SetActive(false);
+        playerController.instance.EnemyHP.SetActive(false);
         Destroy (gameObject);
 		DropLoot();
 

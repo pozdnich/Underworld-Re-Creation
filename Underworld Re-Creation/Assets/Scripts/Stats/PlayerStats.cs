@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using TMPro;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -46,8 +48,9 @@ public class PlayerStats : CharStats{
 		base.Start();
         AnimationControl = GetComponent<PlayerAnim>().animator;
         AnimationControl.speed = CalculationCurrentAttackSpeed();
-       
-        
+        UpdateCharacteristicsShow();
+
+
     }
 
 
@@ -144,6 +147,72 @@ public class PlayerStats : CharStats{
         }
 	}
 
+    public void UpdateCharacteristicsShow()
+    {
+        if (AttackPowerText != null && AttackPowerText.GetComponent<TextMeshProUGUI>() != null)
+        {
+            AttackPowerText.GetComponent<TextMeshProUGUI>().text = $"{CalculationCurrentAttackPowerFromStrength()}";
+        }
+        else
+        {
+            Debug.LogError("AttackPowerText или его компонент TextMeshPro равен null");
+        }
+
+        if (ArmorText != null && ArmorText.GetComponent<TextMeshProUGUI>() != null)
+        {
+            ArmorText.GetComponent<TextMeshProUGUI>().text = $"{DfaultArmor + armorEquip.GetValue() + ((DfaultArmor + armorEquip.GetValue()) / 100 * armorEquipBonus.GetValue())}";
+        }
+        else
+        {
+            Debug.LogError("ArmorText или его компонент TextMeshPro равен null");
+        }
+
+        if (ForceText != null && ForceText.GetComponent<TextMeshProUGUI>() != null)
+        {
+            ForceText.GetComponent<TextMeshProUGUI>().text = $"{Force.GetValue()}";
+        }
+        else
+        {
+            Debug.LogError("ForceText или его компонент TextMeshPro равен null");
+        }
+
+        if (DexterityText != null && DexterityText.GetComponent<TextMeshProUGUI>() != null)
+        {
+            DexterityText.GetComponent<TextMeshProUGUI>().text = $"{Agility.GetValue()}";
+        }
+        else
+        {
+            Debug.LogError("DexterityText или его компонент TextMeshPro равен null");
+        }
+
+        if (IntelligenceText != null && IntelligenceText.GetComponent<TextMeshProUGUI>() != null)
+        {
+            IntelligenceText.GetComponent<TextMeshProUGUI>().text = $"{Force.GetValue()}";
+        }
+        else
+        {
+            Debug.LogError("IntelligenceText или его компонент TextMeshPro равен null");
+        }
+
+        if (VitalityText != null && VitalityText.GetComponent<TextMeshProUGUI>() != null)
+        {
+            VitalityText.GetComponent<TextMeshProUGUI>().text = $"{Vitality.GetValue()}";
+        }
+        else
+        {
+            Debug.LogError("VitalityText или его компонент TextMeshPro равен null");
+        }
+
+        if (LuckText != null && LuckText.GetComponent<TextMeshProUGUI>() != null)
+        {
+            LuckText.GetComponent<TextMeshProUGUI>().text = $"{Luck.GetValue()}";
+        }
+        else
+        {
+            Debug.LogError("LuckText или его компонент TextMeshPro равен null");
+        }
+
+    }
     public IEnumerator ElementalsNegativeEffect(object? deb)
     {
         //Создание переменных и запись в них конвертируемых данных из object
@@ -251,6 +320,7 @@ public class PlayerStats : CharStats{
                     TextHHp();
                     TextMMp();
                 }
+                Debug.Log($"Происходит атака {finalDamage}");
                 return finalDamage;
             }
             return 0;
@@ -291,147 +361,143 @@ public class PlayerStats : CharStats{
 
     }
 
-    //void OnArmorChanged(Armor newItem, Armor oldItem)
-    //{
-    //    if (newItem != null)
-    //    {
-    //        float CofH = (float)100 / (float)CalculationCurrentAmountOfHealthMAX() * (float)AmountOfHealthCurrent;
-    //        float CofM = (float)100 / (float)CalculationCurrentAmountOfManaMAX() * (float)AmounOfManaCurrent;
-
-    //        armorEquip.AddModifier(newItem.ArmorPowerEquipment);
-    //        ElementResistance[(int)newItem.ElArmor].AddModifier(newItem.ElementСoefficient);
-    //        for (int i = 0; i < StatsValuesArmor.Count; i++)
-    //        {
-    //            if (newItem.StatsAccess[i])
-    //            {
-    //                StatsValuesArmor[i].AddModifier(newItem.StatsValues[i]);
-    //            }
-
-    //        }
-
-            
-    //        AmountOfHealthCurrent = Convert.ToInt32((float)CalculationCurrentAmountOfHealthMAX() / (float)100 * CofH);
-    //        AmounOfManaCurrent = Convert.ToInt32((float)CalculationCurrentAmountOfManaMAX() / (float)100 * CofM);
-    //        Debug.Log("Здоровье " + AmountOfHealthCurrent);
-
-    //        ChangeStat = true;
-    //    }
-
-    //    if (oldItem != null)
-    //    {
-    //        float CofH = (float)100 / (float)CalculationCurrentAmountOfHealthMAX() * (float)AmountOfHealthCurrent;
-    //        float CofM = (float)100 / (float)CalculationCurrentAmountOfManaMAX() * (float)AmounOfManaCurrent;
-
-
-    //        armorEquip.RemoveModifier(oldItem.ArmorPowerEquipment);
-    //        ElementResistance[(int)oldItem.ElArmor].RemoveModifier(oldItem.ElementСoefficient);
-    //        for (int i = 0; i < StatsValuesArmor.Count; i++)
-    //        {
-    //            if (oldItem.StatsAccess[i])
-    //            {
-    //                StatsValuesArmor[i].RemoveModifier(oldItem.StatsValues[i]);
-    //            }
-
-    //        }
-
-           
-    //        AmountOfHealthCurrent = Convert.ToInt32((float)CalculationCurrentAmountOfHealthMAX() / (float)100 * CofH);
-    //        AmounOfManaCurrent = Convert.ToInt32((float)CalculationCurrentAmountOfManaMAX() / (float)100 * CofM);
-
-    //        ChangeStat = true;
-    //    }
-
-    //}
-
-    //void OnWeaponChanged(Weapon newItem, Weapon oldItem)
-    //{
-    //    if (newItem != null)
-    //    {
-    //        AttackPowerEquip.AddModifier(newItem.AttackPowerEquipment);
-    //        ElementPowerCharacter = newItem.ElWeapon;
-    //        ElementalDamage[(int)newItem.ElWeapon].AddModifier(newItem.ElementСoefficient);
-    //        for (int i = 0;i< StatsValuesWeapon.Count; i++)
-    //        {
-    //            if (newItem.StatsAccess[i])
-    //            {
-    //                StatsValuesWeapon[i].AddModifier(newItem.StatsValues[i]);
-    //            }
-
-    //        }
-
-    //    }
-
-    //    if (oldItem != null)
-    //    {
-    //        AttackPowerEquip.RemoveModifier(oldItem.AttackPowerEquipment);
-    //        ElementPowerCharacter = 0;
-    //        ElementalDamage[(int)oldItem.ElWeapon].RemoveModifier(oldItem.ElementСoefficient);
-    //        for (int i = 0; i < StatsValuesWeapon.Count; i++)
-    //        {
-    //            if (oldItem.StatsAccess[i])
-    //            {
-    //                StatsValuesWeapon[i].RemoveModifier(oldItem.StatsValues[i]);
-    //            }
-
-    //        }
-           
-    //    }
-
-    //}
-
-    //void OnSecondaryWeaponChanged(SecondaryWeapon newItem, SecondaryWeapon oldItem)
-    //{
-    //    if (newItem != null)
-    //    {
-
-    //        ElementResistance[(int)newItem.ElArmor].AddModifier(newItem.ElementСoefficientArmor);
-    //        ElementalDamage[(int)newItem.ElWeapon].AddModifier(newItem.ElementСoefficientWeapon);
-    //        for (int i = 0; i < StatsValuesWeapon.Count; i++)
-    //        {
-    //            if (newItem.StatsAccess[i])
-    //            {
-    //                StatsValuesWeapon[i].AddModifier(newItem.StatsValues[i]);
-    //            }
-
-    //        }
-
-    //    }
-
-    //    if (oldItem != null)
-    //    {
-
-    //        ElementResistance[(int)newItem.ElArmor].RemoveModifier(newItem.ElementСoefficientArmor);
-    //        ElementalDamage[(int)newItem.ElWeapon].RemoveModifier(newItem.ElementСoefficientWeapon);
-          
-    //        for (int i = 0; i < StatsValuesWeapon.Count; i++)
-    //        {
-    //            if (oldItem.StatsAccess[i])
-    //            {
-    //                StatsValuesSecondaryWeapon[i].RemoveModifier(oldItem.StatsValues[i]);
-    //            }
-
-    //        }
-
-    //    }
-
-    //}
-
-
-    void OnEquipmentChanged(Equipment newItem, Equipment oldItem)
+    public void OnArmorChanged(Equipment newItem, Equipment oldItem)
     {
-        //if (newItem != null)
-        //{
-        //    armor.AddModifier(newItem.armorModifier);
-        //    damage.AddModifier(newItem.damageModifier);
-        //}
+        if (newItem != null)
+        {
+            
+            float CofH = (float)100 / (float)CalculationCurrentAmountOfHealthMAX() * (float)AmountOfHealthCurrent;
+            float CofM = (float)100 / (float)CalculationCurrentAmountOfManaMAX() * (float)AmounOfManaCurrent;
 
-        //if (oldItem != null)
-        //{
-        //    armor.RemoveModifier(oldItem.armorModifier);
-        //    damage.RemoveModifier(oldItem.damageModifier);
-        //}
+            armorEquip.AddModifier(newItem.ArmorPowerEquipment);
+            ElementResistance[(int)newItem.ElEquipmenResistance].AddModifier(newItem.ElementСoefficientResistance);
+            for (int i = 0; i < StatsValues.Count; i++)
+            {
+                if (newItem.StatsAccess[i])
+                {
+                    StatsValues[i].AddModifier(newItem.StatsValues[i]);
+                }
 
+            }
+
+
+            AmountOfHealthCurrent = Convert.ToInt32((float)CalculationCurrentAmountOfHealthMAX() / (float)100 * CofH);
+            AmounOfManaCurrent = Convert.ToInt32((float)CalculationCurrentAmountOfManaMAX() / (float)100 * CofM);
+            Debug.Log("Здоровье " + AmountOfHealthCurrent);
+
+            ChangeStat = true;
+        }
+
+        if (oldItem != null)
+        {
+            float CofH = (float)100 / (float)CalculationCurrentAmountOfHealthMAX() * (float)AmountOfHealthCurrent;
+            float CofM = (float)100 / (float)CalculationCurrentAmountOfManaMAX() * (float)AmounOfManaCurrent;
+
+
+            armorEquip.RemoveModifier(oldItem.ArmorPowerEquipment);
+            ElementResistance[(int)oldItem.ElEquipmenResistance].RemoveModifier(oldItem.ElementСoefficientResistance);
+            for (int i = 0; i < StatsValues.Count; i++)
+            {
+                if (oldItem.StatsAccess[i])
+                {
+                    StatsValues[i].RemoveModifier(oldItem.StatsValues[i]);
+                }
+
+            }
+
+
+            AmountOfHealthCurrent = Convert.ToInt32((float)CalculationCurrentAmountOfHealthMAX() / (float)100 * CofH);
+            AmounOfManaCurrent = Convert.ToInt32((float)CalculationCurrentAmountOfManaMAX() / (float)100 * CofM);
+
+            ChangeStat = true;
+        }
+        UpdateCharacteristicsShow();
     }
+
+    public void OnWeaponChanged(Equipment newItem, Equipment oldItem)
+    {
+        if (newItem != null)
+        {
+            AttackPowerEquip.AddModifier(newItem.AttackPowerEquipment);
+            ElementPowerCharacter = newItem.ElEquipmenDamage;
+            ElementalDamage[(int)newItem.ElEquipmenDamage].AddModifier(newItem.ElementСoefficientDamage);
+            for (int i = 0; i < StatsValues.Count; i++)
+            {
+                if (newItem.StatsAccess[i])
+                {
+                    StatsValues[i].AddModifier(newItem.StatsValues[i]);
+                }
+
+            }
+
+        }
+
+        if (oldItem != null)
+        {
+            AttackPowerEquip.RemoveModifier(oldItem.AttackPowerEquipment);
+            ElementPowerCharacter = 0;
+            ElementalDamage[(int)oldItem.ElEquipmenDamage].RemoveModifier(oldItem.ElementСoefficientDamage);
+            for (int i = 0; i < StatsValues.Count; i++)
+            {
+                if (oldItem.StatsAccess[i])
+                {
+                    StatsValues[i].RemoveModifier(oldItem.StatsValues[i]);
+                }
+
+            }
+
+        }
+        UpdateCharacteristicsShow();
+    }
+
+    public void OnSecondaryWeaponChanged(Equipment newItem, Equipment oldItem)
+    {
+        if (newItem != null)
+        {
+            float CofH = (float)100 / (float)CalculationCurrentAmountOfHealthMAX() * (float)AmountOfHealthCurrent;
+            float CofM = (float)100 / (float)CalculationCurrentAmountOfManaMAX() * (float)AmounOfManaCurrent;
+            ElementResistance[(int)newItem.ElEquipmenResistance].AddModifier(newItem.ElementСoefficientResistance);
+            ElementalDamage[(int)newItem.ElEquipmenDamage].AddModifier(newItem.ElementСoefficientDamage);
+            for (int i = 0; i < StatsValues.Count; i++)
+            {
+                if (newItem.StatsAccess[i])
+                {
+                    StatsValues[i].AddModifier(newItem.StatsValues[i]);
+                }
+
+            }
+            AmountOfHealthCurrent = Convert.ToInt32((float)CalculationCurrentAmountOfHealthMAX() / (float)100 * CofH);
+            AmounOfManaCurrent = Convert.ToInt32((float)CalculationCurrentAmountOfManaMAX() / (float)100 * CofM);
+            ChangeStat = true;
+        }
+
+        if (oldItem != null)
+        {
+            float CofH = (float)100 / (float)CalculationCurrentAmountOfHealthMAX() * (float)AmountOfHealthCurrent;
+            float CofM = (float)100 / (float)CalculationCurrentAmountOfManaMAX() * (float)AmounOfManaCurrent;
+
+            ElementResistance[(int)oldItem.ElEquipmenResistance].RemoveModifier(oldItem.ElementСoefficientResistance);
+            ElementalDamage[(int)oldItem.ElEquipmenDamage].RemoveModifier(oldItem.ElementСoefficientDamage);
+
+            for (int i = 0; i < StatsValues.Count; i++)
+            {
+                if (oldItem.StatsAccess[i])
+                {
+                    StatsValues[i].RemoveModifier(oldItem.StatsValues[i]);
+                }
+
+            }
+            AmountOfHealthCurrent = Convert.ToInt32((float)CalculationCurrentAmountOfHealthMAX() / (float)100 * CofH);
+            AmounOfManaCurrent = Convert.ToInt32((float)CalculationCurrentAmountOfManaMAX() / (float)100 * CofM);
+           
+
+            ChangeStat = true;
+        }
+        UpdateCharacteristicsShow();
+    }
+
+
+   
 
 
 

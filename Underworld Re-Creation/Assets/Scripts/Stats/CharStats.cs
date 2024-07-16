@@ -23,9 +23,15 @@ public class CharStats : MonoBehaviour
    
 
     public GameObject TextMP;
-   
 
-  
+    public GameObject AttackPowerText;
+    public GameObject ArmorText;
+    public GameObject ForceText;
+    public GameObject DexterityText;
+    public GameObject IntelligenceText;
+    public GameObject VitalityText;
+    public GameObject LuckText;
+
     public ElementPower ElementPowerCharacter;
 
 
@@ -126,9 +132,10 @@ public class CharStats : MonoBehaviour
     public bool onES = true;          //Показатель активности навешеного временого негативного стихийного эффекта
     public Coroutine ES;
 
-    public List<Stat> StatsValuesWeapon;
-    public List<Stat> StatsValuesArmor;
-    public List<Stat> StatsValuesSecondaryWeapon;
+    public List<Stat> StatsValues;
+    //public List<Stat> StatsValuesWeapon;
+    //public List<Stat> StatsValuesArmor;
+    //public List<Stat> StatsValuesSecondaryWeapon;
     // Start with max HP. Начните с максимального HP.
     public virtual void Awake()
     {
@@ -248,41 +255,60 @@ public class CharStats : MonoBehaviour
 
 
         //Добавление указателей на статы которые модифицируються при одевании экиперовки Weapon
-        StatsValuesWeapon.Add(Force);
-        StatsValuesWeapon.Add(Intelligence);
-        StatsValuesWeapon.Add(Agility);
-        StatsValuesWeapon.Add(Luck);
-        StatsValuesWeapon.Add(AbilityСastingSpeed);
-        StatsValuesWeapon.Add(Accuracy);
-        StatsValuesWeapon.Add(CriticalHitPercentage);
+        //StatsValuesWeapon.Add(Force);
+        //StatsValuesWeapon.Add(Intelligence);
+        //StatsValuesWeapon.Add(Agility);
+        //StatsValuesWeapon.Add(Luck);
+        //StatsValuesWeapon.Add(AbilityСastingSpeed);
+        //StatsValuesWeapon.Add(Accuracy);
+        //StatsValuesWeapon.Add(CriticalHitPercentage);
 
+        //Force, Intelligence, Agility, Vitality, armorEquipBonus, HealthRecovery, ManaRegeneration, AmountOfHealthBonus, AmountOfManaBonus, AmountOfHealth, AmountOfMana, Dodge, Luck, AbilityСastingSpeed, Accuracy, CriticalHitPercentage
+        //Добавление указателей на статы которые модифицируються при одевании экиперовки Weapon
+        StatsValues.Add(Force);
+        StatsValues.Add(Intelligence);
+        StatsValues.Add(Agility);
+        StatsValues.Add(Vitality);
+        StatsValues.Add(armorEquipBonus);
+        StatsValues.Add(HealthRecovery);
+        StatsValues.Add(ManaRegeneration);
+        StatsValues.Add(AmountOfHealthBonus);
+        StatsValues.Add(AmountOfManaBonus);
+        StatsValues.Add(AmountOfHealth);
+        StatsValues.Add(AmountOfMana);
+        StatsValues.Add(Dodge);
+        StatsValues.Add(Luck);
+        StatsValues.Add(AbilityСastingSpeed);
+        StatsValues.Add(Accuracy);
+        StatsValues.Add(CriticalHitPercentage);
+        
 
         //Добавление указателей на статы которые модифицируються при одевании экиперовки Armor
-        StatsValuesArmor.Add(Force);
-        StatsValuesArmor.Add(Intelligence);
-        StatsValuesArmor.Add(Agility);
-        StatsValuesArmor.Add(Vitality);
-        StatsValuesArmor.Add(armorEquipBonus);
-        StatsValuesArmor.Add(HealthRecovery);
-        StatsValuesArmor.Add(ManaRegeneration);
-        StatsValuesArmor.Add(AmountOfHealthBonus);
-        StatsValuesArmor.Add(AmountOfManaBonus);
-        StatsValuesArmor.Add(AmountOfHealth);
-        StatsValuesArmor.Add(AmountOfMana);
-        StatsValuesArmor.Add(Dodge);
+        //StatsValuesArmor.Add(Force);
+        //StatsValuesArmor.Add(Intelligence);
+        //StatsValuesArmor.Add(Agility);
+        //StatsValuesArmor.Add(Vitality);
+        //StatsValuesArmor.Add(armorEquipBonus);
+        //StatsValuesArmor.Add(HealthRecovery);
+        //StatsValuesArmor.Add(ManaRegeneration);
+        //StatsValuesArmor.Add(AmountOfHealthBonus);
+        //StatsValuesArmor.Add(AmountOfManaBonus);
+        //StatsValuesArmor.Add(AmountOfHealth);
+        //StatsValuesArmor.Add(AmountOfMana);
+        //StatsValuesArmor.Add(Dodge);
 
         //Agility, Vitality, Luck, AbilityСastingSpeed, AmountOfMana, CarriedWeight, CriticalStrikeChance, HealthRecovery, ManaRegeneration , ElementalDebuffChance
         //Добавление указателей на статы которые модифицируються при одевании экиперовки SecondaryWeapon
-        StatsValuesSecondaryWeapon.Add(Agility);
-        StatsValuesSecondaryWeapon.Add(Vitality);
-        StatsValuesSecondaryWeapon.Add(Luck);
-        StatsValuesSecondaryWeapon.Add(AbilityСastingSpeed);
-        StatsValuesSecondaryWeapon.Add(AmountOfMana);
-        StatsValuesSecondaryWeapon.Add(CarriedWeight);
-        StatsValuesSecondaryWeapon.Add(CriticalStrikeChance);
-        StatsValuesSecondaryWeapon.Add(HealthRecovery);
-        StatsValuesSecondaryWeapon.Add(ManaRegeneration);
-        StatsValuesSecondaryWeapon.Add(ElementalDebuffChance);
+        //StatsValuesSecondaryWeapon.Add(Agility);
+        //StatsValuesSecondaryWeapon.Add(Vitality);
+        //StatsValuesSecondaryWeapon.Add(Luck);
+        //StatsValuesSecondaryWeapon.Add(AbilityСastingSpeed);
+        //StatsValuesSecondaryWeapon.Add(AmountOfMana);
+        //StatsValuesSecondaryWeapon.Add(CarriedWeight);
+        //StatsValuesSecondaryWeapon.Add(CriticalStrikeChance);
+        //StatsValuesSecondaryWeapon.Add(HealthRecovery);
+        //StatsValuesSecondaryWeapon.Add(ManaRegeneration);
+        //StatsValuesSecondaryWeapon.Add(ElementalDebuffChance);
 
     }
 
@@ -302,7 +328,7 @@ public class CharStats : MonoBehaviour
         return Convert.ToInt32(((float)DfaultAttackPowerFromStrength + (float)AttackPowerEquip.GetValue()) + ((float)DfaultAttackPowerFromStrength + (float)AttackPowerEquip.GetValue()) / (float)100 * (float)IncreasedAttackPowerFromStrength.GetValue());
     }
 
-    //Вычесление текущей силы атаки от статы Сила
+    //Вычесление текущей силы атаки от статы Интелект
     public int CalculationCurrentAttackPowerIncreasedAttackPowerFromIntelligence()
     {
         IncreasedAttackPowerFromIntelligence.modifiers.Clear();

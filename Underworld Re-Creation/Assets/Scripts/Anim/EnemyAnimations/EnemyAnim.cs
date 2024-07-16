@@ -6,14 +6,16 @@ using UnityEngine;
 public class EnemyAnim : CharAnim
 {
     //EnemyCombat combat;
-    
-
+    EnemyStats EnemyStats;
+    public bool attackCountdown;
     override public void Start()
     {
         base.Start();
-      //  combat = GetComponentInParent<EnemyCombat>();
-       // combat.OnPlayAttackEnemy += AttackDefault;
-       // combat.OnStan += OnStan;
+        //  combat = GetComponentInParent<EnemyCombat>();
+        // combat.OnPlayAttackEnemy += AttackDefault;
+        // combat.OnStan += OnStan;
+        EnemyStats=GetComponent<EnemyStats>();
+        attackCountdown = true;
     }
 
     override public void Update()
@@ -23,10 +25,27 @@ public class EnemyAnim : CharAnim
       
 
     }
+    private IEnumerator initialCountdownMetod()
+    {
+        attackCountdown = false;
+        // Ждём одну секунду
+        yield return new WaitForSeconds(2f);
+        attackCountdown = true;
+        // Вызываем OnDrop
 
+    }
     public void AttackDefault()
     {
-        animator.SetTrigger("Attack");
+       
+        if (attackCountdown)
+        {
+            Debug.Log("Происходит атака");
+            animator.SetTrigger("AttackTrigger");
+            StartCoroutine(initialCountdownMetod());
+
+
+        }
+      
 
 
     }
@@ -36,10 +55,37 @@ public class EnemyAnim : CharAnim
         Debug.Log("СТАН!");
     }
 
-    protected virtual void momentOfAttack()
+
+    public void DoDamage()
     {
-       // GetComponentInParent<EnemyCombat>().MOA();
+        PlayerStats stats = playerController.instance.playerStats;
+        int AttackPower = 0;
+        if (UnityEngine.Random.Range(1, 100) <= EnemyStats.CriticalStrikeChance.GetValue())
+        {
+            AttackPower = EnemyStats.CalculationCurrentAttackPowerFromStrength() + EnemyStats.CalculationCurrentAttackPowerFromStrength() / 100 * EnemyStats.CriticalHitPercentage.GetValue();
+            //  Debug.Log(transform.name + " наносит крит урон в размере " + AttackPower + " damage");
+
+
+        }
+        else
+        {
+            AttackPower = EnemyStats.CalculationCurrentAttackPowerFromStrength();
+            //  Debug.Log(transform.name + " наносит урон в размере " + AttackPower + " damage");
+
+        }
+
+        int FD = stats.TakeNormalDamage(EnemyStats.currentLvl, AttackPower, ((int)EnemyStats.ElementPowerCharacter), EnemyStats.ElementalDamage[(int)EnemyStats.ElementPowerCharacter].GetValue(), EnemyStats.Accuracy.GetValue());
+
+
+        if (((int)EnemyStats.ElementPowerCharacter) != 0 && FD != 0)
+        {
+            int[] NullMas = { 0, 0 };
+            stats.PeriodicElementalDamage(EnemyStats.timeDE, ((int)EnemyStats.ElementPowerCharacter), FD, EnemyStats.RandomPercentage, EnemyStats.ElementalDebuffChance.GetValue());
+        }
+
+
     }
+
 
     public void finishOfAttackEnemys()
     {
@@ -48,4 +94,6 @@ public class EnemyAnim : CharAnim
        // GetComponentInParent<EnemyCombat>().StanTime = true;
         // Debug.Log("Конец анимации атаки от " + transform.name);
     }
+
+
 }

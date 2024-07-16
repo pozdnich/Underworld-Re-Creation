@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7fc555cfa9d15e47b2d493a97aa44eb, type: 3}
+  m_Name: SmallCrossbow
+  m_EditorClassIdentifier: 
+  name: SmallCrossbow
+  icon: {fileID: 21300000, guid: 4ad18340092eebe4f9869edfd262890a, type: 3}
+  showInInventory: 1
+  AllThisItem: {fileID: 4191937911000062370, guid: 615d6789971b44b45a202e131ba26396, type: 3}
+  equipSlot: 4
+  specificEquipment: 9
+  prefab: {fileID: 4210596975467402452, guid: 2edfa186c4fcb264c96341cf9bd07d0d, type: 3}
+  ArmorPowerEquipment: 0
+  AttackPowerEquipment: 10
+  ElEquipmenResistance: 0
+  "Element\u0421oefficientResistance": 0
+  ElEquipmenDamage: 0
+  "Element\u0421oefficientDamage": 0
+  RandomPercentage: 0100000002000000
+  StatsValues: 04000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  StatsAccess: 01000000000000000000000000000000

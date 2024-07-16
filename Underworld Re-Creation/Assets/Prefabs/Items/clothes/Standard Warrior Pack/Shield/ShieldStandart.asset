@@ -15,13 +15,16 @@ MonoBehaviour:
   name: ShieldStandart
   icon: {fileID: 21300000, guid: 3046189b3826155499d08d5c6af2fdf5, type: 3}
   showInInventory: 1
-  AllThisItem: {fileID: 0}
+  AllThisItem: {fileID: 4962467365904891874, guid: 5b369045c3d12c24a883a79ee322b1f7, type: 3}
   equipSlot: 5
   specificEquipment: 11
   prefab: {fileID: 3671788304887804938, guid: 9075d762d062c7b428138e334ad76389, type: 3}
-  ArmorPowerEquipment: 10
+  ArmorPowerEquipment: 200
   AttackPowerEquipment: 0
-  "Element\u0421oefficient": 0
+  ElEquipmenResistance: 0
+  "Element\u0421oefficientResistance": 10
+  ElEquipmenDamage: 2
+  "Element\u0421oefficientDamage": 2
   RandomPercentage: 
-  StatsValues: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  StatsAccess: 
+  StatsValues: 00000000000000000000000032000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  StatsAccess: 00000001000000000000000000000000

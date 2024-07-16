@@ -140,7 +140,7 @@ public class EnemyStats : CharStats
 
     public int TakeNormalDamage(int lvl, int AttackPower, int ElementD, int AdditionalInterest, int AccuracyEnemy)
     {
-
+        Debug.Log("Был нанесён урон");
         //Начальный урон (чистый урон + (чистый урон / 100% * (Дополнительный процент от Елемента и вида врага - Процент сопратевляимости нанесённого вида урона)))
         float initialDamage = (float)AttackPower + (float)AttackPower / (float)100 * ((float)AdditionalInterest - (float)ElementResistance[ElementD].GetValue());
 

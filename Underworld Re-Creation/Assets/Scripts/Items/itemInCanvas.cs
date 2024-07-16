@@ -2,9 +2,11 @@ using sc.terrain.vegetationspawner;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.Timeline.Actions.MenuPriority;
 
 public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
@@ -189,9 +191,21 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
                         cell.isFree = true;
                         inventory.UpdateCellsColor();
                     }
-
+                    playerController.instance.DestroyAttachToMesh(item.prefab, (int)PrevCellEquipped.TypeOfEquipment);
                     PrevCellEquipped = null;
-                    playerController.instance.DestroyAttachToMesh(item.prefab, (int)targetCellEquipped.TypeOfEquipment);
+                    
+                    if ((int)item.equipSlot == 0 || (int)item.equipSlot == 1 || (int)item.equipSlot == 2 || (int)item.equipSlot == 3)
+                    {
+                        playerController.instance.playerStats.OnArmorChanged(null, item);
+                    }
+                    else if ((int)item.equipSlot == 4)
+                    {
+                        playerController.instance.playerStats.OnWeaponChanged(null, item);
+                    }
+                    else if ((int)item.equipSlot == 5)
+                    {
+                        playerController.instance.playerStats.OnSecondaryWeaponChanged(null, item);
+                    }
                 }
             }
             else if (targetCellEquipped != null)
@@ -207,6 +221,17 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
                 }
                 PrevCell = null;
                 playerController.instance.AttachToMesh(item.prefab, (int)targetCellEquipped.TypeOfEquipment);
+                if ((int)item.equipSlot == 0 || (int)item.equipSlot == 1 || (int)item.equipSlot == 2 || (int)item.equipSlot == 3)
+                {
+                    playerController.instance.playerStats.OnArmorChanged(item, null);
+                }else if ((int)item.equipSlot == 4) 
+                {
+                    playerController.instance.playerStats.OnWeaponChanged(item, null);
+                }
+                else if ((int)item.equipSlot == 5)
+                {
+                    playerController.instance.playerStats.OnSecondaryWeaponChanged(item, null);
+                }
             }
         }
     }

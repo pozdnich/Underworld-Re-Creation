@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 
 public class playerController : MonoBehaviour
@@ -30,6 +31,12 @@ public class playerController : MonoBehaviour
     public SkinnedMeshRenderer[] currentMeshes; // массив мешей предметов которые должны весеть на персонаже
     public SkinnedMeshRenderer targetMesh; //меш персонажа
 
+    public PlayerStats playerStats; //параметр для управления статами игрока
+
+    public GameObject EnemyHP;
+    public GameObject EnemyHPImage;
+    public GameObject EnemyHPText;
+
     // ------------------------Область Параметров Абилок----------------------------------
     public GameObject arrowPrefab; // Префаб стрелы
     public Transform bowTransform; // Точка, откуда выпускается стрела
@@ -37,12 +44,13 @@ public class playerController : MonoBehaviour
 
     public bool OnOff = true; // переменная которая недомускает запус следущей абилки если не закончена придедущая
     public SkillSlot[] skillSlots; // слоты умений у игрока
-
+    
     void Start()
     {
         animatorForIR = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         playerAnim = GetComponent<PlayerAnim>();
+        playerStats = GetComponent<PlayerStats>();
         int numSlots = 7; // количество слотов мешей
         currentMeshes = new SkinnedMeshRenderer[numSlots];
     }
@@ -54,13 +62,17 @@ public class playerController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit; //
+
+
+
         //при нажатии мыши персонаж бежит в точку где была нажата мышь
-        if (Physics.Raycast(ray, out hit,500)&&Input.GetMouseButton(1)) 
+        if (Physics.Raycast(ray, out hit, 500) && Input.GetMouseButton(1))
         {
-            
-             if (hit.collider.CompareTag("Enemy")) //если обьект это враг
-            {
-                float cr;
+
+            if (hit.collider.CompareTag("Enemy")) //если обьект это враг
+            { 
+                Focus = hit.collider.gameObject;
+                float cr; // параметр для определения дальний бой или ближний
                 if (Inventory.instance.ProfileSlot[4] != null)
                 {
                     cr = (float)Inventory.instance.ProfileSlot[4].item.specificEquipment;
@@ -69,9 +81,43 @@ public class playerController : MonoBehaviour
                 {
                     cr = -1;
                 }
-               
-                playerAnim.PlayAttackMouse1(cr, hit);
-            }else if (hit.collider.CompareTag("Item")) //если обьект это предмет
+                
+                if (cr > 2 && cr < 6 || cr == -1)
+                {
+                    Vector3 direction = (hit.collider.gameObject.transform.position - transform.position).normalized;
+                    Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+
+                    if (playerAnim.EnemyAndPlayerCollidersTouching && AreCollidersTouching(this.GetComponent<Collider>(), Focus.GetComponent<Collider>()))
+                    {
+                        Focus.GetComponent<Enemy>().ShowEnemyHP = ((float)4);
+                        agent.Stop();//принудительная остановка перемещения
+                        animatorForIR.SetBool("Run", false);// отклучение бега
+                        playerAnim.PlayAttackMouse1();
+                       
+                    }
+                    else
+                    {
+
+                        agent.SetDestination(hit.point);//вводим координаты
+                        animatorForIR.SetBool("Run", true);//запускаем анимацию бега
+                        agent.Resume();// принудительный запуск перемещения
+                        
+                    }
+                    
+                }
+                else if (cr > 5 && cr < 11)
+                {
+                    // Поворачиваем персонажа в сторону цели
+                    Vector3 direction = (hit.point - transform.position).normalized;
+                    direction.y = 0; // Убираем наклон по вертикали, чтобы персонаж не наклонялся вверх/вниз
+                    transform.rotation = Quaternion.LookRotation(direction);
+                    playerAnim.PlayAttackMouse1AtADistance();
+                    
+                }
+
+            }
+            else if (hit.collider.CompareTag("Item")) //если обьект это предмет
             {
                 Focus = hit.collider.gameObject;
                 Debug.Log("Фокус взят на предмет");
@@ -85,14 +131,14 @@ public class playerController : MonoBehaviour
                 animatorForIR.SetBool("Run", true);//запускаем анимацию бега
                 agent.Resume();// принудительный запуск перемещения
             }
-            
 
         }
 
-        if (Vector3.Distance(transform.position, agent.destination) < 0.1f)
+        if (Vector3.Distance(transform.position, agent.destination) < 0.3f )
         {
             agent.Stop();//принудительная остановка перемещения
             animatorForIR.SetBool("Run", false);// отклучение бега
+           
         }
 
         // переход в дереве для плавности анимации (отдых - бег)
@@ -103,7 +149,7 @@ public class playerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 500) && Input.GetButtonDown("Ability1"))
         {
-            // ShootArrow(hit.point);
+           
             if (Inventory.instance.ProfileSlot[4]!=null && skillSlots[0].skill!=null)
             {
                 bool DoesTheWeaponMatch = false;
@@ -117,8 +163,17 @@ public class playerController : MonoBehaviour
                 }
                 if (DoesTheWeaponMatch)
                 {
+                    Vector3 direction = (hit.point - transform.position).normalized;
+                    direction.y = 0; // Убираем наклон по вертикали, чтобы персонаж не наклонялся вверх/вниз
+                    transform.rotation = Quaternion.LookRotation(direction);
                     //запуск скила из первой ячейки (надо сделать для всех ячеек)
-                    playerAnim.OnPlayAttack1Ability1(skillSlots[0].skill.SkillNumber);
+                    if (hit.collider.CompareTag("Enemy"))
+                    {
+                        Focus = hit.collider.gameObject;
+                        Focus.GetComponent<Enemy>().ShowEnemyHP = ((float)4);
+                        playerAnim.OnPlayAttack1Ability1(skillSlots[0].skill.SkillNumber);
+                    }
+                    
                    
                 }
             }
@@ -149,24 +204,28 @@ public class playerController : MonoBehaviour
 
     }
 
-
-    //метод полёта обьекта(по типу стрелы или фаербола)
-    void ShootArrow(Vector3 targetPosition)
+    bool AreCollidersTouching(Collider col1, Collider col2)
     {
-        // Поворачиваем персонажа в сторону цели
-        Vector3 direction = (targetPosition - transform.position).normalized;
-        direction.y = 0; // Убираем наклон по вертикали, чтобы персонаж не наклонялся вверх/вниз
-        transform.rotation = Quaternion.LookRotation(direction);
-
-        GameObject arrow = Instantiate(arrowPrefab, bowTransform.position, bowTransform.rotation);
-        Rigidbody rb = arrow.GetComponent<Rigidbody>();
-        rb.velocity = bowTransform.forward * arrowSpeed;
-
-        // Уничтожаем стрелу через 4 секунды
-        Destroy(arrow, 2f);
+        return col1.bounds.Intersects(col2.bounds);
     }
 
+    ////метод полёта обьекта(по типу стрелы или фаербола)
+    //void ShootArrow(Vector3 targetPosition)
+    //{
+    //    //// Поворачиваем персонажа в сторону цели
+    //    //Vector3 direction = (targetPosition - transform.position).normalized;
+    //    //direction.y = 0; // Убираем наклон по вертикали, чтобы персонаж не наклонялся вверх/вниз
+    //    //transform.rotation = Quaternion.LookRotation(direction);
 
-    
-   
+    //    GameObject arrow = Instantiate(arrowPrefab, bowTransform.position, bowTransform.rotation);
+    //    Rigidbody rb = arrow.GetComponent<Rigidbody>();
+    //    rb.velocity = bowTransform.forward * arrowSpeed;
+
+    //    // Уничтожаем стрелу через 4 секунды
+    //    Destroy(arrow, 2f);
+    //}
+
+
+
+
 }

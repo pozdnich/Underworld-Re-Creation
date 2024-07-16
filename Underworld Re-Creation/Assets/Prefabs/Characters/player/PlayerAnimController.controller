@@ -17,9 +17,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.209914
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_ExitTime: 0.2711922
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -120,8 +120,16 @@ BlendTree:
     m_DirectBlendParameter: Weapon
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: c8bc84f444303f146a77906fe2699d7f, type: 2}
+    m_Motion: {fileID: 7400000, guid: 152e5c0f7d535cf4bb5414d735b2f556, type: 2}
     m_Threshold: 4
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: SkillNumber
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 63f8f2fdf1f12434888e9ca08a3df216, type: 2}
+    m_Threshold: 9
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -130,7 +138,7 @@ BlendTree:
   m_BlendParameter: NumWeapon
   m_BlendParameterY: Weapon
   m_MinThreshold: 0
-  m_MaxThreshold: 4
+  m_MaxThreshold: 9
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -450,7 +458,7 @@ AnimatorState:
   - {fileID: 5957774985945708683}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
+  m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 0
   m_SpeedParameterActive: 0
@@ -462,4 +470,4 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: SkillNumber
