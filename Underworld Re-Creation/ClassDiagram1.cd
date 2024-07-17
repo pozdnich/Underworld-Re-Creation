@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CharAnim" Collapsed="true">
+    <Position X="1.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAQAAAAAACAAAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Anim\CharAnim.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyAnim" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAACAIAgAAAAADAAAAIAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Anim\EnemyAnimations\EnemyAnim.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerAnim" Collapsed="true">
+    <Position X="2.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAEABACCA4QkAAQAEAAAASAAABAACACAICAAACgAA=</HashCode>
+      <FileName>Assets\Scripts\Anim\PlayerAnimations\PlayerAnim.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cell" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAACAAAAAAAAAAAAAAEAAgQAACAQBgAQgAAAA=</HashCode>
+      <FileName>Assets\Scripts\Canvas\inventory\Cell.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CellEquipped" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAACAAAAAAAAAAAAAAEAAgQAACAQAAAQgAAAA=</HashCode>
+      <FileName>Assets\Scripts\Canvas\inventory\CellEquipped.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Inventory" Collapsed="true">
+    <Position X="8" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QARAQAAAACAAiESIAAAABAEGgADgCIAAAAIAABACAEA=</HashCode>
+      <FileName>Assets\Scripts\Canvas\inventory\inventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkillDragHandler" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAkABgAACAAABAAAABAEAACAAAAACAIgAAQAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Canvas\Skills\SkillDragHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SkillSlot" Collapsed="true">
+    <Position X="15" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgABAAACAAAAAAAQAQAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Canvas\Skills\SkillSlot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="cameraController" Collapsed="true">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAACAAAAAAIAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\cameraController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CanvasController" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAIAAAAAgAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\CanvasController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyController" Collapsed="true">
+    <Position X="7.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEACIAAQgAIAQAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\EnemyController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="playerController" Collapsed="true">
+    <Position X="5.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAQCACUAAQgAQAACAKAACABABQACAAABmAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\playerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DropLoot" Collapsed="true">
+    <Position X="9" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAACAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\DropLoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemy" Collapsed="true">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAECQACIAAAAgAASAAAAAIABAAKAAQAAIAAAAQAA=</HashCode>
+      <FileName>Assets\Scripts\Interactables\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PickUp" Collapsed="true">
+    <Position X="13" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interactables\PickUp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PickUp1" Collapsed="true">
+    <Position X="14.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAACAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interactables\PickUp1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PickUpItemInInventory" Collapsed="true">
+    <Position X="5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interactables\PickUpItemInInventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ColorOnHover" Collapsed="true">
+    <Position X="8" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABCAAAAAAAABACAAAEAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Items\ColorOnHover.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemInCanvas" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAkAAAAACAAgACAAAxCEAACAADAQiAKAAAQAAAAAQA=</HashCode>
+      <FileName>Assets\Scripts\Items\itemInCanvas.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Consumable" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Items\itemScriptableObject\Consumable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Equipment" Collapsed="true">
+    <Position X="3" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAiAAAgAEoAQAEABAEAMEC5AAAAEACIQIAAQAAAIICA=</HashCode>
+      <FileName>Assets\Scripts\Items\itemScriptableObject\Equipment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Item" Collapsed="true">
+    <Position X="1.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAQAAAAAAAAgAAAAAAAAEAAAAAwAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Items\itemScriptableObject\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skill" Collapsed="true">
+    <Position X="14" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAgAAAAAAEAAAAAAAABAAQAAA=</HashCode>
+      <FileName>Assets\Scripts\Items\Skill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MeshFromSkinnedMesh" Collapsed="true">
+    <Position X="9.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\MeshFromSkinnedMesh.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Resp" Collapsed="true">
+    <Position X="10.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAAACAAAAAAAAAAAAAAAAAABAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Resp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CharStats" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gB2BQAgAkiBQAFgZzQAIsQ5YC7AmCJIDIAIAAkhNSGU=</HashCode>
+      <FileName>Assets\Scripts\Stats\CharStats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyStats" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEQCCAAACAAEAAAAgAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Stats\EnemyStats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerStats" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQACAAEACiAEAAAAEAAAMAAAAJIAAACBAAAAAAAkAk=</HashCode>
+      <FileName>Assets\Scripts\Stats\PlayerStats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Stat" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAIAIAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\Stats\Stat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StatModifier" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\Stats\StatModifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Itemtype" Collapsed="true">
+    <Position X="10.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAIAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Items\itemInCanvas.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EquipmentSlot" Collapsed="true">
+    <Position X="7" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAQIAAAAAAAAAACAAAAIgAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Items\itemScriptableObject\Equipment.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SpecificEquipment" Collapsed="true">
+    <Position X="12.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACBQAAIEAAAAACQAAAABAICAABAAAAAAAAAAGAAA=</HashCode>
+      <FileName>Assets\Scripts\Items\itemScriptableObject\Equipment.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ItemSize" Collapsed="true">
+    <Position X="8.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAACAAAAAAAABgAAQAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Items\itemSize.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ElementPower" Collapsed="true">
+    <Position X="5.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAQAAIAAAAABkAAJAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Stats\CharStats.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

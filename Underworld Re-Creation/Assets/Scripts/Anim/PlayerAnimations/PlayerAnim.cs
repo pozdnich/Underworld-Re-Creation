@@ -60,6 +60,23 @@ public class PlayerAnim : CharAnim
         // Вызываем OnDrop
 
     }
+
+    private IEnumerator initialArrows()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            
+
+           
+            GameObject arrow = Instantiate(playerController.instance.arrowPrefab, playerController.instance.StartThreeArrowBowTransform.position, playerController.instance.StartThreeArrowBowTransform.rotation);
+            Rigidbody rb = arrow.GetComponent<Rigidbody>();
+            rb.velocity = playerController.instance.StartThreeArrowBowTransform.forward * playerController.instance.arrowSpeed;
+            // Уничтожаем стрелу через 2 секунды
+            Destroy(arrow, 2f);
+            yield return new WaitForSeconds(0.2f);
+        }
+
+    }
     IEnumerator WriteError(string TextError)
     {
         if (errorAbility != null)
@@ -215,6 +232,7 @@ public class PlayerAnim : CharAnim
             {
                 animator.SetFloat("NumWeapon", (float)0);
             }
+            animator.SetFloat("SkillNumber", (float)0);
             animator.SetTrigger("Attack");
 
             StartCoroutine(initialCountdownMetod());
@@ -224,10 +242,14 @@ public class PlayerAnim : CharAnim
 
     public void OnPlayAttack1Ability1(float SkillNumber)
     {
-        animator.SetFloat("SkillNumber", SkillNumber);
-        animator.SetFloat("NumWeapon", (float)Inventory.instance.ProfileSlot[4].item.specificEquipment);
-        animator.SetTrigger("Attack");
+        if (attackCountdown)
+        {
+            animator.SetFloat("SkillNumber", SkillNumber);
+            animator.SetFloat("NumWeapon", (float)Inventory.instance.ProfileSlot[4].item.specificEquipment);
+            animator.SetTrigger("Attack");
 
+            StartCoroutine(initialCountdownMetod());
+        }
     }
 
     public void OnPlayPunctureСalculation()
@@ -310,6 +332,18 @@ public class PlayerAnim : CharAnim
 
         // Уничтожаем стрелу через 4 секунды
         Destroy(arrow, 2f);
+    }
+
+    void ShootThreeArrow()
+    {
+      
+           
+               
+               
+                StartCoroutine(initialArrows());
+       
+
+
     }
 
 }

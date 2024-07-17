@@ -40,6 +40,7 @@ public class playerController : MonoBehaviour
     // ------------------------Область Параметров Абилок----------------------------------
     public GameObject arrowPrefab; // Префаб стрелы
     public Transform bowTransform; // Точка, откуда выпускается стрела
+    public Transform StartThreeArrowBowTransform; // Точка, откуда выпускается 3 стрелы
     public float arrowSpeed = 1f; // Скорость полета стрелы
 
     public bool OnOff = true; // переменная которая недомускает запус следущей абилки если не закончена придедущая
@@ -86,10 +87,13 @@ public class playerController : MonoBehaviour
                 {
                     Vector3 direction = (hit.collider.gameObject.transform.position - transform.position).normalized;
                     Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 0.2f);
 
                     if (playerAnim.EnemyAndPlayerCollidersTouching && AreCollidersTouching(this.GetComponent<Collider>(), Focus.GetComponent<Collider>()))
                     {
+                        direction = (hit.point - transform.position).normalized;
+                        direction.y = 0; // Убираем наклон по вертикали, чтобы персонаж не наклонялся вверх/вниз
+                        transform.rotation = Quaternion.LookRotation(direction);
                         Focus.GetComponent<Enemy>().ShowEnemyHP = ((float)4);
                         agent.Stop();//принудительная остановка перемещения
                         animatorForIR.SetBool("Run", false);// отклучение бега

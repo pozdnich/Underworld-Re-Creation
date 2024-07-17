@@ -196,6 +196,7 @@ public class EnemyStats : CharStats
                     if (OnHealthReachedZero != null)
                     {
                         OnHealthReachedZero();
+
                     }
                 }
                 if (TextHP != null && TextMP != null)

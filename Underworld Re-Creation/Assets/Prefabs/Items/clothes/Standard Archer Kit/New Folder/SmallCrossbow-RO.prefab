@@ -51,8 +51,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.14651826, y: 0.06738154, z: 0.020863911}
-  m_Center: {x: -0.0045183944, y: -0.019649962, z: -0.00013699567}
+  m_Size: {x: 0.14651826, y: 0.06821573, z: 0.020863911}
+  m_Center: {x: -0.0045183944, y: -0.020067057, z: -0.00013699567}
 --- !u!1 &3724794833297282735
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemtype: 0
-  item: {fileID: 11400000, guid: 71a3098023aa9b5449dc5c85d455c5a5, type: 2}
+  item: {fileID: 11400000, guid: c044396b10bd2354b9e5db0f0ceaee46, type: 2}
   inventory: {fileID: 0}
   canvas: {fileID: 0}
   PrevCell: {fileID: 0}

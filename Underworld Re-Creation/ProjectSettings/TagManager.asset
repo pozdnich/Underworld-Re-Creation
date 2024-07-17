@@ -15,6 +15,7 @@ TagManager:
   - InventoryItemsCanvas
   - ProfileItemsAndStatsCanvas
   - Enemy
+  - TransparentObjects
   layers:
   - Default
   - TransparentFX

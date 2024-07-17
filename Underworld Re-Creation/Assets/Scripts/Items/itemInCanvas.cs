@@ -183,6 +183,7 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
                 {
                     Debug.Log("Перемещение в инвентарь из профиля.");
                     CellEquipped cell = PrevCellEquipped;
+                    PrevCellEquipped.isFree = true;
                     SetPosition(this, targetCell);
                     PrevCell = targetCell;
 
@@ -232,6 +233,7 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
                 {
                     playerController.instance.playerStats.OnSecondaryWeaponChanged(item, null);
                 }
+                PrevCellEquipped.isFree = false;
             }
         }
     }

@@ -13,14 +13,14 @@ public class EnemyController : MonoBehaviour {
 	
 
 	Enemy skeleton;
-
-	void Start()
+	EnemyAnim enemyAnim;
+    void Start()
 	{
 		target = playerController.instance.transform;
 		agent = GetComponent<NavMeshAgent>();
 		
         skeleton = GetComponent<Enemy>();
-
+        enemyAnim = GetComponent<EnemyAnim>();
     }
 
 	void Update ()
@@ -42,11 +42,12 @@ public class EnemyController : MonoBehaviour {
 				
                 // Move towards the player
                 agent.SetDestination(target.position);
-				if (distance <= agent.stoppingDistance)
+                enemyAnim.animator.SetFloat("IdleOrWalk", 1);//запускаем анимацию бега
+                if (distance <= agent.stoppingDistance)
 				{
-					
-					// Attack
-					GetComponent<EnemyAnim>().AttackDefault();
+                    enemyAnim.animator.SetFloat("IdleOrWalk", 0);
+                    // Attack
+                    enemyAnim.AttackDefault();
 
                     FaceTarget();
 
