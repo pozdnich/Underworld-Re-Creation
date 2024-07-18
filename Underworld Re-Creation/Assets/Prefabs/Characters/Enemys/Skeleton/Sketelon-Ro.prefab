@@ -1992,7 +1992,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.4
   m_Height: 2.4100251
   m_Direction: 1
   m_Center: {x: 0, y: 0.70501256, z: 0}
@@ -2199,6 +2199,7 @@ MonoBehaviour:
   Loot:
   - {fileID: 6057415643509973878, guid: 847a7234c329b5b4ea244c81f6093db0, type: 3}
   - {fileID: 4962467365904891874, guid: 5b369045c3d12c24a883a79ee322b1f7, type: 3}
+  - {fileID: 8769683983261260606, guid: cf424eb06d2d6a74c9339bd7f17e8d54, type: 3}
   StanEnemy: 0
   ShowEnemyHP: 0
   LootStart: {fileID: 7736349467084778305}

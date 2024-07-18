@@ -7194,8 +7194,10 @@ MonoBehaviour:
   SizeY: 10
   cellPrefub: {fileID: 793418512411197004, guid: d6322f357de002940a0585684466be16, type: 3}
   draggedItem: {fileID: 0}
+  draggedItemCon: {fileID: 0}
   initialItems: []
   Items: []
+  ItemsCon: []
   ProfileSlot:
   - {fileID: 0}
   - {fileID: 0}
@@ -9295,6 +9297,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5459448545183264121}
   m_CullTransparentMesh: 1
+--- !u!1001 &3291516453142279095
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3877773892772390985, guid: cf424eb06d2d6a74c9339bd7f17e8d54, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 305.41272
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877773892772390985, guid: cf424eb06d2d6a74c9339bd7f17e8d54, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877773892772390985, guid: cf424eb06d2d6a74c9339bd7f17e8d54, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -297.1392
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877773892772390985, guid: cf424eb06d2d6a74c9339bd7f17e8d54, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877773892772390985, guid: cf424eb06d2d6a74c9339bd7f17e8d54, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877773892772390985, guid: cf424eb06d2d6a74c9339bd7f17e8d54, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877773892772390985, guid: cf424eb06d2d6a74c9339bd7f17e8d54, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877773892772390985, guid: cf424eb06d2d6a74c9339bd7f17e8d54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877773892772390985, guid: cf424eb06d2d6a74c9339bd7f17e8d54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877773892772390985, guid: cf424eb06d2d6a74c9339bd7f17e8d54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769683983261260606, guid: cf424eb06d2d6a74c9339bd7f17e8d54, type: 3}
+      propertyPath: m_Name
+      value: healthPotion
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cf424eb06d2d6a74c9339bd7f17e8d54, type: 3}
 --- !u!218 &3301240923803134773
 Terrain:
   m_ObjectHideFlags: 0
@@ -10755,7 +10814,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -10779,9 +10838,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2.420856
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.710428, z: 0}
+  m_Center: {x: 0, y: 0.46, z: 0}
 --- !u!114 &6351623946433854503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12635,3 +12694,4 @@ SceneRoots:
   - {fileID: 927968560}
   - {fileID: 902797869}
   - {fileID: 606125724}
+  - {fileID: 3291516453142279095}

@@ -53,20 +53,6 @@ public class Equipment : Item {
     public List<int> StatsValues = new List<int>() { Force, Intelligence, Agility, Vitality, armorEquipBonus, HealthRecovery, ManaRegeneration, AmountOfHealthBonus, AmountOfManaBonus, AmountOfHealth, AmountOfMana, Dodge, Luck, AbilityСastingSpeed, Accuracy, CriticalHitPercentage };
     public List<bool> StatsAccess;
     
-
-    // Вызывается при нажатии в инвентаре
-    public override void Use ()
-	{
-		//  Оборудовать
-
-
-        // Удалить из инвентаря
-
-
-    }
-
-    
-
    
 }
                         // Голова, Грудь, Ноги, Ступни, Оружие, Вторичное оружие, Амулет

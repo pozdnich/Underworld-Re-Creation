@@ -133,9 +133,7 @@ public class CharStats : MonoBehaviour
     public Coroutine ES;
 
     public List<Stat> StatsValues;
-    //public List<Stat> StatsValuesWeapon;
-    //public List<Stat> StatsValuesArmor;
-    //public List<Stat> StatsValuesSecondaryWeapon;
+  
     // Start with max HP. Начните с максимального HP.
     public virtual void Awake()
     {
@@ -166,30 +164,7 @@ public class CharStats : MonoBehaviour
     {
         
         
-        //Выбор основного атрибута в зависимости от класса персонажа или если это Enemy
-        //switch ((int)classCharacter)
-        //{
-        //    case 0:
-        //        nameClasStat = "Сила";
-        //        ClasStat = Force;
-               
-        //        break;
-        //    case 1:
-        //        nameClasStat = "Сила";
-        //        ClasStat = Force;
-               
-        //        break;
-        //    case 2:
-        //        nameClasStat = "Сила";
-        //        ClasStat = Force;
-        //        break;
-        //    case 3:
-        //        nameClasStat = "Интелект";
-        //        ClasStat = Intelligence;
-        //        break;
-
-
-        //}
+       
 
         //Увелечение коэффициента прироста силы атаки на соответствующее количество Основной характеристики Силы
         for (int i = 1; i <= Force.GetValue(); i++)
@@ -254,14 +229,7 @@ public class CharStats : MonoBehaviour
         ElementResistance.Add(VenomG);
 
 
-        //Добавление указателей на статы которые модифицируються при одевании экиперовки Weapon
-        //StatsValuesWeapon.Add(Force);
-        //StatsValuesWeapon.Add(Intelligence);
-        //StatsValuesWeapon.Add(Agility);
-        //StatsValuesWeapon.Add(Luck);
-        //StatsValuesWeapon.Add(AbilityСastingSpeed);
-        //StatsValuesWeapon.Add(Accuracy);
-        //StatsValuesWeapon.Add(CriticalHitPercentage);
+        
 
         //Force, Intelligence, Agility, Vitality, armorEquipBonus, HealthRecovery, ManaRegeneration, AmountOfHealthBonus, AmountOfManaBonus, AmountOfHealth, AmountOfMana, Dodge, Luck, AbilityСastingSpeed, Accuracy, CriticalHitPercentage
         //Добавление указателей на статы которые модифицируються при одевании экиперовки Weapon
@@ -282,33 +250,6 @@ public class CharStats : MonoBehaviour
         StatsValues.Add(Accuracy);
         StatsValues.Add(CriticalHitPercentage);
         
-
-        //Добавление указателей на статы которые модифицируються при одевании экиперовки Armor
-        //StatsValuesArmor.Add(Force);
-        //StatsValuesArmor.Add(Intelligence);
-        //StatsValuesArmor.Add(Agility);
-        //StatsValuesArmor.Add(Vitality);
-        //StatsValuesArmor.Add(armorEquipBonus);
-        //StatsValuesArmor.Add(HealthRecovery);
-        //StatsValuesArmor.Add(ManaRegeneration);
-        //StatsValuesArmor.Add(AmountOfHealthBonus);
-        //StatsValuesArmor.Add(AmountOfManaBonus);
-        //StatsValuesArmor.Add(AmountOfHealth);
-        //StatsValuesArmor.Add(AmountOfMana);
-        //StatsValuesArmor.Add(Dodge);
-
-        //Agility, Vitality, Luck, AbilityСastingSpeed, AmountOfMana, CarriedWeight, CriticalStrikeChance, HealthRecovery, ManaRegeneration , ElementalDebuffChance
-        //Добавление указателей на статы которые модифицируються при одевании экиперовки SecondaryWeapon
-        //StatsValuesSecondaryWeapon.Add(Agility);
-        //StatsValuesSecondaryWeapon.Add(Vitality);
-        //StatsValuesSecondaryWeapon.Add(Luck);
-        //StatsValuesSecondaryWeapon.Add(AbilityСastingSpeed);
-        //StatsValuesSecondaryWeapon.Add(AmountOfMana);
-        //StatsValuesSecondaryWeapon.Add(CarriedWeight);
-        //StatsValuesSecondaryWeapon.Add(CriticalStrikeChance);
-        //StatsValuesSecondaryWeapon.Add(HealthRecovery);
-        //StatsValuesSecondaryWeapon.Add(ManaRegeneration);
-        //StatsValuesSecondaryWeapon.Add(ElementalDebuffChance);
 
     }
 

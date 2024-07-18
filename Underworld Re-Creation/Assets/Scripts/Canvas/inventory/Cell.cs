@@ -41,7 +41,7 @@ public class Cell : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
             if (isFree)
             {
                 
-                inventory.CellsColorize(this, inventory.draggedItem.Size, UnityEngine.Color.red);
+                inventory.CellsColorize(this, inventory.draggedItem.Size, UnityEngine.Color.grey);
                
             }
         }

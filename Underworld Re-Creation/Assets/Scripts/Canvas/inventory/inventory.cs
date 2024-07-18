@@ -30,10 +30,12 @@ public class Inventory : MonoBehaviour
     public int SizeX, SizeY; // Размер инвентаря
     public Cell cellPrefub; // образец одной клетки
     public Cell[,] cells; // двухмерный масив инвентаря
-    public ItemInCanvas draggedItem; // элемент перетаскивания
+    public ItemInCanvas draggedItem; // элемент перетаскивания Equipment
+    public itemInCanvasCon draggedItemCon; // элемент перетаскивания Consumable
 
     public List<ItemInCanvas> initialItems; // Список предметов для добавления при запуске(надо будет потом избавится и настроить загрузку от Items)
     public List<ItemInCanvas> Items; // Список предметов которыми заправляет игрок
+    public List<itemInCanvasCon> ItemsCon; // Список предметов которыми заправляет игрок
     public ItemInCanvas[] ProfileSlot; //Слоты профиля
 
     bool OneUse; // требуется для загрузки, тоесть для того чтобы передать в инвентарь вещи из сохранения
@@ -64,7 +66,7 @@ public class Inventory : MonoBehaviour
                 newCell.y = y;
                 newCell.isFree = true;
                 newCell.inventory = this;
-                newCell.CellIndex.text = x + " " + y;
+                //newCell.CellIndex.text = x + " " + y;
 
                 cells[x, y] = newCell;
             }
@@ -299,6 +301,43 @@ public class Inventory : MonoBehaviour
                 }
             }
         
+        UpdateCellsColor();
+    }
+    public void AddItemCon(itemInCanvasCon itemPrefab)
+    {
+
+
+        // Инстанцируем предмет из префаба
+        itemInCanvasCon newItem = Instantiate(itemPrefab, transformItems); // Делаем инвентарь родительским объектом
+
+        // Находим первую подходящую свободную ячейку для предмета
+        bool nextInitialItem = false;
+        for (int y = 0; y < SizeY; y++)
+        {
+            for (int x = 0; x < SizeX; x++)
+            {
+
+
+                if (CheckCellFree(cells[x, y], newItem.Size))
+                {
+
+                    newItem.SetInitialPosition(newItem, cells[x, y]); // Устанавливаем начальную позицию
+                    newItem.PrevCell = cells[x, y];
+                    ItemsCon.Add(newItem);
+                    CellsOccupation(cells[x, y], newItem.Size, false);
+
+                    nextInitialItem = true;
+
+                    break;
+                }
+            }
+            if (nextInitialItem)
+            {
+
+                break;
+            }
+        }
+
         UpdateCellsColor();
     }
 }

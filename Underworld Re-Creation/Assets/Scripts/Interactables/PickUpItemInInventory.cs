@@ -19,6 +19,7 @@ public class PickUpItemInInventory : MonoBehaviour
             playerController player = other.GetComponent<playerController>();
             if (player != null && player.Focus == gameObject)
             {
+               
                 Debug.Log("Предмет был взят в фокус");
                 Inventory.instance.AddItem(GetComponentInChildren<ItemInCanvas>());
 

@@ -30,6 +30,9 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
 
     private bool isDragging = false; // Флаг для отслеживания перетаскивания
 
+    private float lastClickTime;
+    private const float doubleClickThreshold = 0.3f; // Интервал для двойного нажатия
+
     void Start()
     {
       
@@ -363,6 +366,8 @@ public class ItemInCanvas : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         }
        
     }
+
+
 }
 
 public enum Itemtype { Equipment, Consumable, Resource } // (Экиперовка,  Расходник,  Ресурс)
